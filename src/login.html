@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="row">
+      <div class="banner">
+        <h1>테이블</h1>
+        <p>Teibeul</p>
+        <p>Korealainen ravintola | Pannaan pöytä koreaksi</p>
+      </div>
+      <div class="navipalkki">
+        <a href="login.html">Omat sivut</a> <a href="tilaus.html">Tilaa ruokaa kotiin</a>
+        <a href="arvostelut.html">Arvostelut</a> <a href="main.html">Takaisin etusivulle</a>
+      </div>
+      <div class="column">
+        <form action="userpage.html">
+          <label for="login"> Kirjaudu sisään </label>
+          <br />
+          <br />
+          <label for="Username">Käyttäjätunnus:</label><br />
+          <input type="text" id="user_name" name="username" required /><br />
+          <label for="pw">Salasana:</label><br />
+          <input
+            type="password"
+            id="passwd"
+            name="password"
+            required/>
+            <br /><br />
+          <a href="userpage.html">
+            <button type="button" class="haku-btn">Kirjaudu</button></a>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
