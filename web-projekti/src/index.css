@@ -69,6 +69,11 @@ color: black;
   text-decoration: none;
 }
 
+a:hover {
+  background-color: black;
+  color: #ffe4c4;
+}
+
 .column {
   flex: 100%;
   margin-left: 15%;
