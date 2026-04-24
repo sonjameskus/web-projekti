@@ -22,8 +22,10 @@ CREATE TABLE IF NOT EXISTS `history` (
   `order` varchar(50) DEFAULT NULL,
   `address_id` int(11) NOT NULL,
   PRIMARY KEY (`order_id`),
+  KEY `address_id` (`address_id`),
   KEY `user_id-history` (`user_id`),
-  KEY `address_id` (`address_id`)
+  CONSTRAINT `address_id` FOREIGN KEY (`address_id`) REFERENCES `addresses` (`address_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `user_id-history` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 -- Dumping data for table rest.history: ~0 rows (approximately)
