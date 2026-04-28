@@ -12,17 +12,17 @@ const Order = () => {
       <div className="column">
        <h2>Ruoka 1</h2>
         <p>Hyvää ruokaa</p>
-        <p>Allergeenit: J O TA I N</p>
+        <p>Allergeenit:</p>
         <button className="hakuBtn">Lisää koriin</button>
         <hr />
         <h2>Ruoka 2</h2>
         <p>Hyvää ruokaa</p>
-        <p>Allergeenit: J O TA I N</p>
+        <p>Allergeenit:</p>
         <button className="hakuBtn">Lisää koriin</button>
         <hr />
         <h2>Ruoka 3</h2>
         <p>Hyvää ruokaa</p>
-        <p>Allergeenit: J O TA I N</p>
+        <p>Allergeenit:</p>
        <button className="hakuBtn">Lisää koriin</button>
       </div>
     </div>
