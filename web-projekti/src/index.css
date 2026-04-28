@@ -10,14 +10,16 @@ form {
   font-family: 'Bookman Old Style', serif;
 }
 
-.hakuBtn {
-background-color: #ffe4c4;
-color: black;
+button {
+  background-color: #ffe4c4;
+  color: black;
+  border: 2px solid #edb572;
+  margin: 2px;
 }
 
-.hakuBtn:hover {
-background-color: black;
-color: #ffe4c4;
+button:hover {
+  background-color: black;
+  color: #ffe4c4;
 }
 
 .row {
@@ -85,3 +87,141 @@ a:hover {
   color: black;
   padding: 5px;
 }
+
+hr {
+  border: 1px solid #000000;
+}
+
+[data-theme="dark"] .row {
+  display: grid;
+  margin: 5%;
+}
+
+[data-theme="dark"] .banner {
+  flex: 100%;
+  margin-left: 15%;
+  margin-right: 15%;
+  text-align: center;
+  font-family: 'Bookman Old Style';
+  background-color: #000000;
+  color: #a38764;
+  height: 150px;
+}
+
+[data-theme="dark"] .navipalkki {
+  flex: 100%;
+  margin-left: 15%;
+  margin-right: 15%;
+  font-family: 'Bookman Old Style';
+  background-color: #000000;
+  color: #a38764;
+  height: 40px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+[data-theme="dark"] a {
+  color: #a38764;
+  text-decoration: none;
+}
+
+[data-theme="dark"] a:hover {
+  background-color: #a38764;
+  color: #000000;
+
+}
+
+[data-theme="dark"] .navipalkki a:last-of-type {
+  float: right;
+
+}
+
+[data-theme="dark"] .navipalkki a:hover {
+  background-color: #a38764;
+  color: #000000;
+}
+
+[data-theme="dark"] .column {
+  flex: 100%;
+  margin-left: 15%;
+  margin-right: 15%;
+  align-items: center;
+  height: 100%;
+  font-family: 'Bookman Old Style';
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #a38764;
+}
+
+[data-theme="dark"] body {
+  background-image: url('/koreanfooddark.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-color: #000000;
+}
+
+[data-theme="dark"] #haku-btn {
+  background-color: #000000;
+  color: #a38764;
+  border: 2px solid #a38764;
+}
+
+[data-theme="dark"] #haku-btn:hover {
+  background-color: #a38764;
+  color: #000000;
+}
+
+[data-theme="dark"] #themeToggle {
+  background-color: #000000;
+  color: #a38764;
+  float: right;
+}
+
+[data-theme="dark"] dialog {
+  font-family: 'Bookman Old Style';
+  background-color: rgba(0, 0, 0, 0.9);
+  color: #a38764;
+  border: #a38764 dotted 2px;
+}
+
+[data-theme="dark"] button {
+  background-color: #000000;
+  color: #a38764;
+  border: 2px solid #a38764;
+}
+
+[data-theme="dark"] button:hover {
+  background-color: #a38764;
+  color: #000000;
+}
+
+[data-theme="dark"] #cityFilter {
+  font-family: 'Bookman Old Style';
+  background-color: #000000;
+  color: #a38764;
+  padding: 5px;
+}
+
+[data-theme="dark"] td:hover {
+  background-color: #a38764;
+  color: #000000;
+}
+
+[data-theme="dark"] form {
+  font-family: 'Bookman Old Style';
+  background-color: #000000;
+  color: #a38764;
+}
+
+[data-theme="dark"] input {
+  background-color: #000000;
+  color: #a38764;
+  border: 1px solid #a38764;
+  margin: 2px;
+}
+
+[data-theme="dark"] hr {
+  border: 1px solid #a38764;
+}
+

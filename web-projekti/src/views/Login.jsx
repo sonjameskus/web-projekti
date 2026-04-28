@@ -1,7 +1,10 @@
-import { Link } from "react-router";
 import Navigation from "../components/Navigation";
+import { useState } from 'react';
+import LoginForm from '../components/LoginForm';
+import RegisterForm from '../components/RegisterForm';
 
 const Login = () => {
+  const [mode, setMode] = useState('login');
   return (
      <div className="row">
       <div className="banner">
@@ -11,25 +14,34 @@ const Login = () => {
       </div>
       <Navigation />
       <div className="column">
-        <form action="userpage.html">
-          <label for="login"> Kirjaudu sisään </label>
-          <br />
-          <br />
-          <label for="Username">Käyttäjätunnus:</label><br />
-          <input type="text" id="user_name" name="username" required /><br />
-          <label for="pw">Salasana:</label><br />
-          <input
-            type="password"
-            id="passwd"
-            name="password"
-            required/>
-            <br /><br />
-          <Link to="/userpage">
-            <button type="button" class="hakuBtn">Kirjaudu</button></Link>
-        </form>
+        <section className="auth-view">
+      <div className="auth-backdrop" aria-hidden="true" />
+      <div className="auth-wrapper">
+        <div className="auth-tabs" role="tablist">
+          <button
+            role="tab"
+            aria-selected={mode === 'login'}
+            className={`auth-tab${mode === 'login' ? ' auth-tab--active' : ''}`}
+            onClick={() => setMode('login')}
+          >
+            Kirjaudu sisään
+          </button>
+          <button
+            role="tab"
+            aria-selected={mode === 'register'}
+            className={`auth-tab${mode === 'register' ? ' auth-tab--active' : ''}`}
+            onClick={() => setMode('register')}
+          >
+            Luo käyttäjätunnus
+          </button>
+        </div>
+        {mode === 'login' ? <LoginForm /> : <RegisterForm />}
+      </div>
+    </section>
       </div>
     </div>
   )
 }
 
 export default Login;
+

@@ -12,15 +12,15 @@ const History = () => {
 
       <div className="column">
         <p>
-          Tilaushistoria:
+          Tilaushistoria: </p>
           <hr />
-          1. Kimchi Ramen - 12.03.2024
+          <p> 1. Kimchi Ramen - 12.03.2024</p>
           <hr />
-          2. Bibimbap - 05.02.2024
+          <p> 2. Bibimbap - 05.02.2024</p>
           <hr />
-          3. Tteokbokki - 20.01.2024
+          <p> 3. Tteokbokki - 20.01.2024</p>
           <hr />
-        </p>
+
       </div>
     </div>
   );

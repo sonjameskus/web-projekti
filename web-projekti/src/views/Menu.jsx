@@ -9,12 +9,6 @@ const Menu = () => {
   </div>
       <Navigation />
       <div className="column">
-        <form>
-          <label for="haku">
-            Hae sivulta: </label>
-          <input type="text" id="haku" name="haku" />
-          <input type="submit" value="Hae" class="haku-btn" />
-        </form>
         <h2>Ruoka 1</h2>
         <p>Hyvää ruokaa</p>
         <p>Allergeenit: J O TA I N</p>
