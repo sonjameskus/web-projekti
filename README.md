@@ -1,37 +1,37 @@
-/_ eslint-disable no-use-before-define _/
-
 # 1. installaa dependencyt
-
 ```bash
 npm install
 ```
 
 # 2. starttaa api
-
 ```bash
 npm start
 ```
 
 # api doc
 
+# ✔ = valmis
+# X = ei valmis
+
 # api/user/
 
-    login - kirjautuu käyttäjälle
+    login ✔ - kirjautuu käyttäjälle
 
-    logout - kirjautuu ulos ja menee takaisin etusivulle
+    logout X - kirjautuu ulos ja menee takaisin etusivulle
 
-    signin - tekee käyttäjän
+    signin ✔ - tekee käyttäjän
 
-    delete - poistaa käyttäjän (en tiiä tehäänkö tää)
+    delete X - poistaa käyttäjän (en tiiä tehäänkö tää)
 
-    getme - returnaa userin jos on loginnattu kai
+    getme ✔ - returnaa userin jos on loginnattu
 
 # api/restaurant/
 
-    list - antaa ruokalistan
+    list ✔ - antaa ruokalistan
 
-    review - get antaa listan - post laittaa arvostelun (pitää ollakirjautunut)
+    review ✔ - get antaa listan - post laittaa arvostelun (pitää olla kirjautunut)
 
-    order - post tekee tilauksen
+    order X - post tekee tilauksen
 
-# ex: http://127.0.0.1:3000/api/restaurant/list
+
+# ex: http://127.0.0.1:3000/api/restaurant/list for localhost
