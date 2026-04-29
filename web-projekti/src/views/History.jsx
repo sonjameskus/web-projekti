@@ -14,11 +14,14 @@ const History = () => {
         <p>
           Tilaushistoria: </p>
           <hr />
-          <p> 1. Kimchi Ramen - 12.03.2024</p>
+          <p>{new Date().toLocaleString('fi-FI')}
+            <br />Kimchi Ramen</p>
           <hr />
-          <p> 2. Bibimbap - 05.02.2024</p>
+          <p>{new Date().toLocaleString('fi-FI')}
+            <br />Bibimbap</p>
           <hr />
-          <p> 3. Tteokbokki - 20.01.2024</p>
+          <p>{new Date().toLocaleString('fi-FI')}
+            <br />Tteokbokki</p>
           <hr />
 
       </div>

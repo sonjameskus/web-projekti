@@ -23,6 +23,7 @@ const RegisterForm = () => {
     try {
       const userResult = await postUser(inputs);
       console.log(userResult);
+      alert("Käyttäjätunnus luotu onnistuneesti");
     } catch (error) {
       alert(error.message);
     }
@@ -32,7 +33,6 @@ const RegisterForm = () => {
     clearErrors();
     try {
     const checkResult = await checkUser(inputs.username);
-    console.log(checkResult);
     if (!checkResult.available) {
       handleError("username", "Username not available");
     }
