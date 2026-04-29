@@ -35,7 +35,7 @@ const removeFromCart = (req, res) => {
 
 const order = (req, res) => {
 	res.send({message: 'ordering'});
-	// ???
+	// tallentaa orderin vaan
 };
 
 export {
