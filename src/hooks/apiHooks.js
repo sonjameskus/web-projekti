@@ -7,10 +7,11 @@ const useMedia = (loadMedia = true) => {
   useEffect(() => {
     const getMedia = async () => {
       try {
+        // hae mediat
         const mediaItems = await fetchData(
           import.meta.env.VITE_MEDIA_API + '/media',
         );
-
+        // hae medioihin käyttäjätiedot
         const mediaWithUsers = await Promise.all(
           mediaItems.map(async (item) => {
             const user = await fetchData(
@@ -143,6 +144,7 @@ const useFile = () => {
     const fetchOptions = {
       method: 'POST',
       headers: {
+        // huom tähän ei content-type headeria
         Authorization: `Bearer ${token}`,
       },
       body: formData,
