@@ -2,17 +2,20 @@ import promisePool from '../../utils/database.js';
 
 const getList = async (req, res) => {
     const [result] = await promisePool.execute('SELECT * FROM meals');
-    res.send(result);
+    res.json(result);
 };
 
 const getReviews = async (req, res) => {
     const [result] = await promisePool.execute('SELECT * FROM reviews');
-    res.send(result);
+    res.json(result);
 };
 
-const addReview = (req, res) => {
-    res.send({message: 'adding review'});
-    // laittaa databaseen uuden listan
+const addReview = async (req, res) => {
+    await promisePool.execute(
+        'INSERT INTO reviews (user_id, review_content) VALUES (?, ?)', // mitä tulee review idks ?
+        [req.body.user_id, req.body.review_content]
+    );
+    res.sendStatus(201);
 };
 
 const getCart = (req, res) => {
