@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `addresses` (
   PRIMARY KEY (`address_id`),
   KEY `user_id-address` (`user_id`),
   CONSTRAINT `user_id-address` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table rest.addresses: ~0 rows (approximately)
 
