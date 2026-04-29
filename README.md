@@ -15,23 +15,25 @@ npm start
 
 # api/user/
 
-    login ✔ - kirjautuu käyttäjälle
+    login ✔ - post kirjautuu käyttäjälle
 
-    logout X - kirjautuu ulos ja menee takaisin etusivulle
+    logout X - post kirjautuu ulos ja menee takaisin etusivulle
 
-    signin ✔ - tekee käyttäjän
+    signin ✔ - post tekee käyttäjän
 
-    delete X - poistaa käyttäjän (en tiiä tehäänkö tää)
+    delete X - delete poistaa käyttäjän (en tiiä tehäänkö tää) + (pitää olla kirjautunut)
 
-    getme ✔ - returnaa userin jos on loginnattu
+    address X - get ottaa databasesta userin addressin - update lisää 
+
+    getme ✔ - get returnaa userin jos on kirjautunut
 
 # api/restaurant/
 
-    list ✔ - antaa ruokalistan
+    list ✔ - get antaa ruokalistan
 
     review ✔ - get antaa listan - post laittaa arvostelun (pitää olla kirjautunut)
 
-    order X - post tekee tilauksen
+    order X - post tekee tilauksen (pitääkö olla kirjautunut?)
 
 
 # ex: http://127.0.0.1:3000/api/restaurant/list for localhost
