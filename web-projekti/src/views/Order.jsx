@@ -7,7 +7,6 @@ const Order = () => {
     {id: 2, name: 'Kimchi stew', price: 10, allergens: []},
   ]);
   const [openItemId, setOpenItemId] = useState(null);
-  const [selectedItem, setSelectedItem] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
   const [inputs, setInputs] = useState({

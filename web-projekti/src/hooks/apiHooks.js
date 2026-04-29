@@ -93,7 +93,7 @@ const useUser = () => {
       body: JSON.stringify(inputs),
     };
 
-    return await fetchData(import.meta.env.VITE_AUTH_API + '/getme', options);
+    return await fetchData(import.meta.env.VITE_AUTH_API + '/users', options);
   };
 
   const checkUser = async (username) => {
