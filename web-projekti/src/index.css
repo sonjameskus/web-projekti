@@ -67,7 +67,7 @@ button:hover {
 }
 
 a {
-color: black;
+  color: black;
   text-decoration: none;
 }
 
@@ -92,12 +92,43 @@ hr {
   border: 1px solid #000000;
 }
 
-[data-theme="dark"] .row {
+input {
+  background-color: #ffe4c4;
+  color: black;
+  border: 1px solid #edb572;
+  margin: 2px;
+}
+
+.title {
+  background-color: #ffe4c4;
+  color: black;
+  border: 1px solid #edb572;
+  margin: 2px;
+  width: 75%;
+}
+
+.description {
+  width: 75%;
+  padding: 5px;
+  border: 1px solid #edb572;
+  background: #ffe4c4;
+  color: #000000;
+}
+
+dialog {
+  font-family: 'Bookman Old Style';
+  background-color: #ffe4c4;
+  color: #000000;
+  border: #edb572 dotted 2px;
+
+}
+
+[data-theme='dark'] .row {
   display: grid;
   margin: 5%;
 }
 
-[data-theme="dark"] .banner {
+[data-theme='dark'] .banner {
   flex: 100%;
   margin-left: 15%;
   margin-right: 15%;
@@ -108,7 +139,7 @@ hr {
   height: 150px;
 }
 
-[data-theme="dark"] .navipalkki {
+[data-theme='dark'] .navipalkki {
   flex: 100%;
   margin-left: 15%;
   margin-right: 15%;
@@ -120,28 +151,26 @@ hr {
   margin-bottom: 20px;
 }
 
-[data-theme="dark"] a {
+[data-theme='dark'] a {
   color: #a38764;
   text-decoration: none;
 }
 
-[data-theme="dark"] a:hover {
+[data-theme='dark'] a:hover {
   background-color: #a38764;
   color: #000000;
-
 }
 
-[data-theme="dark"] .navipalkki a:last-of-type {
+[data-theme='dark'] .navipalkki a:last-of-type {
   float: right;
-
 }
 
-[data-theme="dark"] .navipalkki a:hover {
+[data-theme='dark'] .navipalkki a:hover {
   background-color: #a38764;
   color: #000000;
 }
 
-[data-theme="dark"] .column {
+[data-theme='dark'] .column {
   flex: 100%;
   margin-left: 15%;
   margin-right: 15%;
@@ -152,7 +181,7 @@ hr {
   color: #a38764;
 }
 
-[data-theme="dark"] body {
+[data-theme='dark'] body {
   background-image: url('/koreanfooddark.jpg');
   background-position: center;
   background-repeat: no-repeat;
@@ -161,67 +190,88 @@ hr {
   background-color: #000000;
 }
 
-[data-theme="dark"] #haku-btn {
+[data-theme='dark'] #haku-btn {
   background-color: #000000;
   color: #a38764;
   border: 2px solid #a38764;
 }
 
-[data-theme="dark"] #haku-btn:hover {
+[data-theme='dark'] #haku-btn:hover {
   background-color: #a38764;
   color: #000000;
 }
 
-[data-theme="dark"] #themeToggle {
+[data-theme='dark'] #themeToggle {
   background-color: #000000;
   color: #a38764;
   float: right;
 }
 
-[data-theme="dark"] dialog {
+[data-theme='dark'] dialog {
   font-family: 'Bookman Old Style';
   background-color: rgba(0, 0, 0, 0.9);
   color: #a38764;
   border: #a38764 dotted 2px;
 }
 
-[data-theme="dark"] button {
+[data-theme='dark'] button {
   background-color: #000000;
   color: #a38764;
   border: 2px solid #a38764;
 }
 
-[data-theme="dark"] button:hover {
+[data-theme='dark'] button:hover {
   background-color: #a38764;
   color: #000000;
 }
 
-[data-theme="dark"] #cityFilter {
+[data-theme='dark'] #cityFilter {
   font-family: 'Bookman Old Style';
   background-color: #000000;
   color: #a38764;
   padding: 5px;
 }
 
-[data-theme="dark"] td:hover {
+[data-theme='dark'] td:hover {
   background-color: #a38764;
   color: #000000;
 }
 
-[data-theme="dark"] form {
+[data-theme='dark'] form {
   font-family: 'Bookman Old Style';
   background-color: #000000;
   color: #a38764;
 }
 
-[data-theme="dark"] input {
+[data-theme='dark'] input {
   background-color: #000000;
   color: #a38764;
   border: 1px solid #a38764;
   margin: 2px;
 }
 
-[data-theme="dark"] hr {
+[data-theme='dark'] .title {
+  background-color: #000000;
+  color: #a38764;
+  border: 1px solid #a38764;
+  margin: 2px;
+  width: 75%;
+}
+
+[data-theme='dark'] hr {
   border: 1px solid #a38764;
 }
 
+[data-theme='dark'] .description {
+  width: 75%;
+  padding: 5px;
+  border: 1px solid #a38764;
+  background: #000000;
+  color: #a38764;
+}
+
+[data-theme='dark'] .modal {
+  position: fixed;
+  background: #000000;
+  color: #a38764;
+}
