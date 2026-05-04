@@ -37,7 +37,4 @@ npm start
 
 
 # ex: http://127.0.0.1:3000/api/restaurant/list for localhost
-<<<<<<< HEAD
-=======
 
->>>>>>> 64a3fdbfe79242787479b35c7817dd816259f03c
