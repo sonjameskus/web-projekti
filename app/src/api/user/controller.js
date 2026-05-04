@@ -14,8 +14,7 @@ const login = async (req, res) => {
 
 	const match = await bcrypt.compare(req.body.password, user.password);
 	if (!match) {
-		res.sendStatus(401).send('Password incorrect');
-		return;
+		return res.status(401).send('Password incorrect');
 	}
 
 	const webUser = {
@@ -39,7 +38,14 @@ const signin = async (req, res) => {
 	const username = req.body.username;
 	const pass = req.body.password;
 	const email = req.body.email;
-	console.log(123);
+
+	console.log(username);
+	console.log(pass);
+	console.log(email);
+
+	if (username == null || pass == null || email == null) {
+		return res.send('Invalid credentials');
+	}
 
 	const user = await findUserByUsername(username);
 	if (user) {
@@ -67,4 +73,8 @@ const getme = async (req, res) => {
 	}
 };
 
-export {login, logout, signin, getme};
+const getAddress = async (req, res) => {
+	const address = await promisePool.execute('');
+};
+
+export {login, logout, signin, getme, getAddress};
