@@ -23,7 +23,7 @@ npm start
 
     delete X - delete poistaa käyttäjän (en tiiä tehäänkö tää) + (pitää olla kirjautunut)
 
-    address X - get ottaa databasesta userin addressin - update lisää 
+    address X - get ottaa databasesta userin addressin - update lisää
 
     getme ✔ - get returnaa userin jos on kirjautunut
 
@@ -37,4 +37,7 @@ npm start
 
 
 # ex: http://127.0.0.1:3000/api/restaurant/list for localhost
+<<<<<<< HEAD
+=======
 
+>>>>>>> 64a3fdbfe79242787479b35c7817dd816259f03c
