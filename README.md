@@ -1,13 +1,19 @@
-# React + Vite
+# 1. installaa dependencyt
+```bash
+npm install
+```
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 2. starttaa api
+```bash
+npm start
+```
 
-Currently, two official plugins are available:
+# api doc
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+# ✔ = valmis
+# X = ei valmis
 
-## React Compiler
+# api/user/
 
     login ✔ - post kirjautuu käyttäjälle
 
@@ -31,3 +37,7 @@ Currently, two official plugins are available:
 
 
 # ex: http://127.0.0.1:3000/api/restaurant/list for localhost
+<<<<<<< HEAD
+=======
+
+>>>>>>> 64a3fdbfe79242787479b35c7817dd816259f03c
