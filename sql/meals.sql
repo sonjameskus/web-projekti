@@ -18,7 +18,7 @@
 DROP TABLE IF EXISTS `meals`;
 CREATE TABLE IF NOT EXISTS `meals` (
   `meal_id` int(11) NOT NULL AUTO_INCREMENT,
-  `meat/fish/vegan` int(11) DEFAULT NULL,
+  `meal_type` ENUM('meat', 'fish', 'vegan') NOT NULL,
   `meal_name` varchar(50) NOT NULL,
   `meal_content` varchar(200) DEFAULT NULL,
   `allergens` varchar(200) DEFAULT NULL,
@@ -27,20 +27,20 @@ CREATE TABLE IF NOT EXISTS `meals` (
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 -- Dumping data for table rest.meals: ~13 rows (approximately)
-INSERT INTO `meals` (`meal_id`, `meat/fish/vegan`, `meal_name`, `meal_content`, `allergens`, `price`) VALUES
-	(1, 2, '비빔밥 | Bibimbap', 'Keitettyä riisiä, kasviksia ja kananmunaa', 'v, g, vg (pyydettäessä)', 15),
-	(2, 0, '불고기 비빔밥 | Naudanliha-bibimbap', 'Keitettyä riisiä, kasviksia, kananmunaa ja naudanlihaa', 'sis. soija, seesami, gluteeni', 17),
-	(3, 0, '치킨 비빔밥 | Kana-bibimbap', 'Keitettyä riisiä, kasviksia, kananmunaa ja kanaa', 'sis. soija, seesami, gluteeni', 17),
-	(4, 0, '제육 비빔밥 | Sianliha-bibimbap', 'Keitettyä riisiä, kasviksia, kananmunaa ja sianlihaa', 'sis. soija, seesami, gluteeni', 17),
-	(5, 2, '두부 비빔밥 | Tofu-bibimbap', 'Keitettyä riisiä, kasviksia, kananmunaa ja tofua', 'v, g, vg (pyydettäessä)', 17),
-	(6, 0, '불고기 | Bulgogi', 'Marinoitua naudanlihaa, riisiä, kasviksia ja seesaminsiemeniä', 'sis. soija, seesami, gluteeni', 16),
-	(7, 0, '닭불고기 | Dak bulgogi', 'Marinoitua kananlihaa, riisiä, kasviksia ja seesaminsiemeniä', 'sis. soija, seesami, gluteeni', 16),
-	(8, 0, '돼지불고기 | Dwaeji bulgogi', 'Chilikastikkeessa marinoitua sianlihaa, riisiä, kasviksia ja seesaminsiemeniä', 'sis. soija, seesami, gluteeni', 16),
-	(9, 2, '김치찌개 | Kimchi jjigae', 'Kimchikeittoa, tofua, sianlihaa ja riisiä', 'sis. soija, seesami, gluteeni', 16),
-	(10, 1, '김치 | Kimchi', 'Fermentoitua kiinankaalia, chiliä ja valkosipulia ', '', 4),
-	(11, 2, '김밥 | Kimbap', 'Riisiä, merilevää, kasviksia ja kananmunaa ', 'sis. kananmuna, seesami, soija, v, vg (pyydettäessä)', 7),
-	(12, 2, '잡채 | Japchae', 'Lasinuudeleita, kasviksia ja seesamiöljyä', 'sis. soija, seesami, gluteeni, v, vg (pyydettäessä)', 8),
-	(13, 2, '파전 | Pajeon', 'Korealainen pannukakku, kevätsipulia ja kasviksia', 'sis. gluteeni, kananmuna', 9);
+INSERT INTO `meals` (`meal_id`, `meal_type`, `meal_name`, `meal_content`, `allergens`, `price`) VALUES
+	(1, 'vegan', '비빔밥 | Bibimbap', 'Keitettyä riisiä, kasviksia ja kananmunaa', 'v, g, vg (pyydettäessä)', 15),
+	(2, 'meat', '불고기 비빔밥 | Naudanliha-bibimbap', 'Keitettyä riisiä, kasviksia, kananmunaa ja naudanlihaa', 'sis. soija, seesami, gluteeni', 17),
+	(3, 'meat', '치킨 비빔밥 | Kana-bibimbap', 'Keitettyä riisiä, kasviksia, kananmunaa ja kanaa', 'sis. soija, seesami, gluteeni', 17),
+	(4, 'meat', '제육 비빔밥 | Sianliha-bibimbap', 'Keitettyä riisiä, kasviksia, kananmunaa ja sianlihaa', 'sis. soija, seesami, gluteeni', 17),
+	(5, 'vegan', '두부 비빔밥 | Tofu-bibimbap', 'Keitettyä riisiä, kasviksia, kananmunaa ja tofua', 'v, g, vg (pyydettäessä)', 17),
+	(6, 'meat', '불고기 | Bulgogi', 'Marinoitua naudanlihaa, riisiä, kasviksia ja seesaminsiemeniä', 'sis. soija, seesami, gluteeni', 16),
+	(7, 'meat', '닭불고기 | Dak bulgogi', 'Marinoitua kananlihaa, riisiä, kasviksia ja seesaminsiemeniä', 'sis. soija, seesami, gluteeni', 16),
+	(8, 'meat', '돼지불고기 | Dwaeji bulgogi', 'Chilikastikkeessa marinoitua sianlihaa, riisiä, kasviksia ja seesaminsiemeniä', 'sis. soija, seesami, gluteeni', 16),
+	(9, 'vegan', '김치찌개 | Kimchi jjigae', 'Kimchikeittoa, tofua, sianlihaa ja riisiä', 'sis. soija, seesami, gluteeni', 16),
+	(10, 'fish', '김치 | Kimchi', 'Fermentoitua kiinankaalia, chiliä ja valkosipulia ', '', 4),
+	(11, 'vegan', '김밥 | Kimbap', 'Riisiä, merilevää, kasviksia ja kananmunaa ', 'sis. kananmuna, seesami, soija, v, vg (pyydettäessä)', 7),
+	(12, 'vegan', '잡채 | Japchae', 'Lasinuudeleita, kasviksia ja seesamiöljyä', 'sis. soija, seesami, gluteeni, v, vg (pyydettäessä)', 8),
+	(13, 'vegan', '파전 | Pajeon', 'Korealainen pannukakku, kevätsipulia ja kasviksia', 'sis. gluteeni, kananmuna', 9);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

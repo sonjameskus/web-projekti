@@ -1,4 +1,4 @@
-import { useUser } from "../hooks/apiHooks";
+import { useAuthentication } from "../hooks/apiHooks";
 import useForm from "../hooks/formHooks";
 
 const RegisterForm = () => {
@@ -8,20 +8,21 @@ const RegisterForm = () => {
     email: "",
   };
 
-  const { postUser, checkUser, checkEmail } = useUser();
+  //const { postUser, checkUser, checkEmail } = useUser();
+  const { postRegister } = useAuthentication();
 
   const {
     inputs,
     handleInputChange,
     handleSubmit,
-    handleError,
+    //handleError,
     errors,
-    clearErrors,
+    //clearErrors,
   } = useForm(doRegister, initValues);
 
   async function doRegister() {
     try {
-      const userResult = await postUser(inputs);
+      const userResult = await postRegister(inputs);
       console.log(userResult);
       alert("Käyttäjätunnus luotu onnistuneesti");
     } catch (error) {
@@ -29,7 +30,7 @@ const RegisterForm = () => {
     }
   }
 
-  const handleUserBlur = async () => {
+ /* const handleUserBlur = async () => {
     clearErrors();
     try {
     const checkResult = await checkUser(inputs.username);
@@ -52,7 +53,7 @@ const RegisterForm = () => {
   } catch {
     // tyhjä
   };
-  };
+  };*/
 
   return (
     <>
@@ -66,7 +67,7 @@ const RegisterForm = () => {
             type="text"
             id="registeruser"
             onChange={handleInputChange}
-            onBlur={handleUserBlur}
+            //onBlur={handleUserBlur}
             autoComplete="username"
           />
         </div>
@@ -90,7 +91,7 @@ const RegisterForm = () => {
             type="email"
             id="registeremail"
             onChange={handleInputChange}
-            onBlur={handleEmailBlur}
+            //onBlur={handleEmailBlur}
             autoComplete="current-email"
           />
         </div>

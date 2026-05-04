@@ -17,7 +17,7 @@
 -- Dumping structure for table rest.addresses
 DROP TABLE IF EXISTS `addresses`;
 CREATE TABLE IF NOT EXISTS `addresses` (
-  `address` varchar(50) NOT NULL,
+  `address` varchar(200) NOT NULL,
   `address_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`address_id`),
