@@ -7,7 +7,7 @@ const Order = () => {
     {id: 2, name: 'Kimchi stew', price: 10, allergens: []},
   ]);
   const [openItemId, setOpenItemId] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
+;
 
   const [inputs, setInputs] = useState({
     description: '',
@@ -19,7 +19,7 @@ const Order = () => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    setIsOpen(false);
+    setOpenItemId(false);
   };
 
   return (
@@ -62,12 +62,12 @@ const Order = () => {
                   />
                   <br />
 
-                  <button type="submit" onClick={() => setIsOpen(false)}>
+                  <button type="submit" onClick={() => setOpenItemId(false)}>
                     Lisää koriin
                   </button>
                 </form>
 
-                <button onClick={() => setIsOpen(false)}>Sulje</button>
+                <button onClick={() => setOpenItemId(false)}>Sulje</button>
               </div>
             )}
           </div>
