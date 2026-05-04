@@ -19,7 +19,9 @@ DROP TABLE IF EXISTS `reviews`;
 CREATE TABLE IF NOT EXISTS `reviews` (
   `user_id` int(11) NOT NULL,
   `review_id` int(11) NOT NULL AUTO_INCREMENT,
-  `review_content` varchar(50) NOT NULL,
+  `review_title` varchar(50) NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `review_content` varchar(500) NOT NULL,
   PRIMARY KEY (`review_id`),
   KEY `user_id-review` (`user_id`),
   CONSTRAINT `user_id-review` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON UPDATE CASCADE

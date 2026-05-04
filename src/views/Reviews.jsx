@@ -1,17 +1,40 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import Navigation from '../components/Navigation';
-import { useUserContext } from "../hooks/contextHooks";
+import {useUserContext} from '../hooks/contextHooks';
+import {useReviews} from '../hooks/apiHooks';
 
 const Reviews = () => {
+  const {getReviews, addReview} = useReviews();
   const {user} = useUserContext();
+  const [data, setData] = useState([]);
   const [inputs, setInputs] = useState({
     title: '',
     description: '',
   });
 
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const res = await getReviews();
+        setData(res);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchReviews();
+  }, []);
+
   const doUpload = async () => {
     try {
       const token = localStorage.getItem('token');
+
+      await addReview(inputs, token);
+
+      const res = await getReviews();
+      setData(res);
+
+      setInputs({ title: "", description: "" });
     } catch (e) {
       console.log(e.message);
     }
@@ -73,29 +96,15 @@ const Reviews = () => {
             </>
           )}
         </>
-        <h2>Otsikko</h2>
-        <p>
-          {new Date().toLocaleString('fi-FI')}
-          <br />
-          Nimimerkki
-        </p>
-        <p>Arvostelu</p>
-        <hr />
-        <h2>Otsikko</h2>
-        <p>
-          {new Date().toLocaleString('fi-FI')}
-          <br />
-          Nimimerkki
-        </p>
-        <p>Arvostelu</p>
-        <hr />
-        <h2>Otsikko</h2>
-        <p>
-          {new Date().toLocaleString('fi-FI')}
-          <br />
-          Nimimerkki
-        </p>
-        <p>Arvostelu</p>
+        {data.map((review) => (
+          <div key={review.review_id}>
+            <h2>{review.review_title}</h2>
+            <p>{review.created_at}</p>
+            <p>User id: (pitää korjata) {review.user_id}</p>
+            <p>{review.review_content}</p>
+            <hr />
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -19,7 +19,7 @@ DROP TABLE IF EXISTS `history`;
 CREATE TABLE IF NOT EXISTS `history` (
   `user_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL AUTO_INCREMENT,
-  `order` varchar(50) DEFAULT NULL,
+  `order_content` varchar(200) DEFAULT NULL,
   `address_id` int(11) NOT NULL,
   PRIMARY KEY (`order_id`),
   KEY `address_id` (`address_id`),
