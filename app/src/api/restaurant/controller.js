@@ -18,6 +18,7 @@ const addReview = async (req, res) => {
 	res.sendStatus(201);
 };
 
+/*
 const getCart = (req, res) => {
 	res.send({message: 'getting cart'});
 	// ottaa cartin jostain
@@ -32,18 +33,11 @@ const removeFromCart = (req, res) => {
 	res.send({message: 'removing from cart'});
 	// poistetaan cartista
 };
+*/
 
 const order = (req, res) => {
 	res.send({message: 'ordering'});
 	// tallentaa orderin vaan
 };
 
-export {
-	getList,
-	getReviews,
-	addReview,
-	getCart,
-	addToCart,
-	removeFromCart,
-	order,
-};
+export {getList, getReviews, addReview, order};
