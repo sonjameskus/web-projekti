@@ -5,39 +5,56 @@ const getList = async (req, res) => {
 	res.json(result);
 };
 
+const addFood = async (req, res) => {
+	const [result] = await promisePool.execute('INSERT INTO  meals (?, ?, ?)');
+	res.json(result);
+};
+
+const deleteFood = async (req, res) => {
+	const [result] = await promisePool.execute('SELECT * FROM meals');
+	res.json(result);
+};
+
 const getReviews = async (req, res) => {
 	const [result] = await promisePool.execute('SELECT * FROM reviews');
 	res.json(result);
 };
 
 const addReview = async (req, res) => {
+	if (req.body.review_title == null || req.body.review_content == null) {
+		return res.send('Null content');
+	}
 	await promisePool.execute(
-		'INSERT INTO reviews (user_id, review_content) VALUES (?, ?)', // mitä tulee review idks ?
-		[req.body.user_id, req.body.review_content]
+		'INSERT INTO reviews (user_id, review_title, review_content) VALUES (?, ?)',
+		[
+			res.locals.user?.user_id,
+			req.body.review_title,
+			req.body.review_content,
+		]
 	);
 	res.sendStatus(201);
 };
 
-/*
-const getCart = (req, res) => {
-	res.send({message: 'getting cart'});
-	// ottaa cartin jostain
+const order = async (req, res) => {
+	const address = await promisePool.execute(
+		'INSERT INTO history (user_id, order, address_id) VALUES (?, ?, ?)',
+		[
+			escape.locals.user?.user_id,
+			req.body.order_content,
+			req.body.address_id,
+		]
+	);
+	res.sendStatus(201);
 };
 
-const addToCart = (req, res) => {
-	res.send({message: 'adding to cart'});
-	// laittaa jotain carttiin johonki
-};
+const getOrderHistory = async (req, res) => {};
 
-const removeFromCart = (req, res) => {
-	res.send({message: 'removing from cart'});
-	// poistetaan cartista
+export {
+	getList,
+	getReviews,
+	addReview,
+	order,
+	addFood,
+	deleteFood,
+	getOrderHistory,
 };
-*/
-
-const order = (req, res) => {
-	res.send({message: 'ordering'});
-	// tallentaa orderin vaan
-};
-
-export {getList, getReviews, addReview, order};
