@@ -9,10 +9,25 @@ Currently, two official plugins are available:
 
 ## React Compiler
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+    login ✔ - post kirjautuu käyttäjälle
 
-Note: This will impact Vite dev & build performances.
+    logout X - post kirjautuu ulos ja menee takaisin etusivulle
 
-## Expanding the ESLint configuration
+    signin ✔ - post tekee käyttäjän
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+    delete X - delete poistaa käyttäjän (en tiiä tehäänkö tää) + (pitää olla kirjautunut)
+
+    address X - get ottaa databasesta userin addressin - update lisää
+
+    getme ✔ - get returnaa userin jos on kirjautunut
+
+# api/restaurant/
+
+    list ✔ - get antaa ruokalistan
+
+    review ✔ - get antaa listan - post laittaa arvostelun (pitää olla kirjautunut)
+
+    order X - post tekee tilauksen (pitääkö olla kirjautunut?)
+
+
+# ex: http://127.0.0.1:3000/api/restaurant/list for localhost
