@@ -3,7 +3,7 @@ import api from './api/index.js';
 import cors from 'cors';
 
 const app = express();
-const hostname = '127.0.0.1';
+const hostname = '0.0.0.0';
 const port = 3000;
 
 app.use(cors());

@@ -23,7 +23,7 @@ const Reviews = () => {
     };
 
     fetchReviews();
-  }, []);
+  }, [getReviews]);
 
   const doUpload = async () => {
     try {
@@ -35,6 +35,7 @@ const Reviews = () => {
       setData(res);
 
       setInputs({ title: "", description: "" });
+
     } catch (e) {
       console.log(e.message);
     }
@@ -99,8 +100,7 @@ const Reviews = () => {
         {data.map((review) => (
           <div key={review.review_id}>
             <h2>{review.review_title}</h2>
-            <p>{review.created_at}</p>
-            <p>User id: (pitää korjata) {review.user_id}</p>
+            <p>Arvostelu kirjoitettu {new Date(review.created_at).toLocaleString('fi-FI')}</p>
             <p>{review.review_content}</p>
             <hr />
           </div>

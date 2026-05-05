@@ -11,7 +11,7 @@ const UserPage = () => {
     const getUser = async () => {
       const token = localStorage.getItem('token');
       const userResponse = await getUserByToken(token);
-      setUser(userResponse.user);
+      setUser(userResponse);
     };
 
     getUser();
@@ -34,7 +34,7 @@ const UserPage = () => {
               <hr />
               <p>Osoitteet: </p>
               <hr />
-              <p>Arvostelut:</p>
+              <p>Arvostelut: </p>
               <hr />
               <Link to="/history">Tilaushistoria</Link>
             </div>

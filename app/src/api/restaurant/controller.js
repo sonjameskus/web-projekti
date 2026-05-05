@@ -21,18 +21,27 @@ const getReviews = async (req, res) => {
 };
 
 const addReview = async (req, res) => {
-	if (req.body.review_title == null || req.body.review_content == null) {
-		return res.send('Null content');
-	}
-	await promisePool.execute(
-		'INSERT INTO reviews (user_id, review_title, review_content) VALUES (?, ?)',
-		[
-			res.locals.user?.user_id,
-			req.body.review_title,
-			req.body.review_content,
-		]
-	);
-	res.sendStatus(201);
+  try {
+
+    if (req.body.review_title == null || req.body.review_content == null) {
+      return res.status(400).json({ message: "Null content" });
+    }
+
+    await promisePool.execute(
+      `INSERT INTO reviews (user_id, review_title, review_content)
+       VALUES (?, ?, ?)`,
+      [
+        res.locals.user.user_id,
+        req.body.review_title,
+        req.body.review_content,
+      ]
+    );
+
+    res.status(201).json({ message: "Review added" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
 };
 
 const order = async (req, res) => {
