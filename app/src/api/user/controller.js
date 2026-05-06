@@ -9,12 +9,12 @@ const login = async (req, res) => {
 
 	const user = await findUserByUsername(username);
 	if (!user) {
-		return res.status(401).send('User not found');
+		return res.status(401).json('User not found');
 	}
 
 	const match = await bcrypt.compare(req.body.password, user.password);
 	if (!match) {
-		return res.status(401).send('Password incorrect');
+		return res.status(401).json('Password incorrect');
 	}
 
 	const webUser = {
@@ -44,12 +44,12 @@ const signin = async (req, res) => {
 	console.log(email);
 
 	if (username == null || pass == null || email == null) {
-		return res.send('Invalid credentials');
+		return res.json('Invalid credentials');
 	}
 
 	const user = await findUserByUsername(username);
 	if (user) {
-		return res.status(401).send('User already exists');
+		return res.status(401).json('User already exists');
 	}
 
 	bcrypt.genSalt(10, function (err, salt) {
