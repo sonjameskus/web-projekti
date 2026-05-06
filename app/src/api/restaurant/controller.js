@@ -2,8 +2,13 @@ import promisePool from '../../utils/database.js';
 import getAddressById from './model.js';
 
 const getList = async (req, res) => {
-	const [result] = await promisePool.execute('SELECT * FROM meals');
-	res.status(200).json(result);
+	try {
+		const [result] = await promisePool.execute('SELECT * FROM meals');
+		res.status(200).json(result);
+	} catch (err) {
+		console.error(err);
+		res.status(500).json(err.message);
+	}
 };
 
 const addFood = async (req, res) => {

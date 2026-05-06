@@ -36,20 +36,16 @@ const login = async (req, res) => {
 
 const signin = async (req, res) => {
 	try {
-		const username = req.body.username;
-		const pass = req.body.password;
-		const email = req.body.email;
-
-		const user = await findUserByUsername(username);
+		const user = await findUserByUsername(req.body.username);
 		if (user) {
 			return res.status(400).json('User already exists');
 		}
 
 		bcrypt.genSalt(10, function (err, salt) {
-			bcrypt.hash(pass, salt, async function (err, hash) {
+			bcrypt.hash(req.body.password, salt, async function (err, hash) {
 				await promisePool.execute(
 					'INSERT INTO users (username, password, email) VALUES (?, ?, ?)',
-					[username, hash, email]
+					[req.body.username, hash, req.body.email]
 				);
 			});
 		});
