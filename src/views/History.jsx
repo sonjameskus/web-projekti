@@ -1,6 +1,26 @@
 import Navigation from '../components/Navigation';
+import {useOrderHistory} from '../hooks/apiHooks';
+import { useEffect, useState } from "react";
+
 
 const History = () => {
+const {getOrderHistory} = useOrderHistory();
+const [data, setData] = useState([]);
+
+useEffect(() => {
+    const fetchHistory = async () => {
+      try {
+        const res = await getOrderHistory();
+        setData(res);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchHistory();
+  }, []);
+
+
   return (
     <div className="row">
       <div className="banner">
@@ -14,15 +34,13 @@ const History = () => {
         <p>
           Tilaushistoria: </p>
           <hr />
-          <p>{new Date().toLocaleString('fi-FI')}
-            <br />Kimchi Ramen</p>
-          <hr />
-          <p>{new Date().toLocaleString('fi-FI')}
-            <br />Bibimbap</p>
-          <hr />
-          <p>{new Date().toLocaleString('fi-FI')}
-            <br />Tteokbokki</p>
-          <hr />
+          {data.map((order) => (
+          <div key={order.order_id}>
+            <h2>{new Date(order.created_at).toLocaleString('fi-FI')}</h2>
+            <p>{order.order_content}</p>
+            <hr />
+            </div>
+            ))}
 
       </div>
     </div>
