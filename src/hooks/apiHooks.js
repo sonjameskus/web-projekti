@@ -105,4 +105,28 @@ const useReviews = () => {
 	return {getReviews, addReview};
 };
 
-export {useUser, useAuthentication, useMenu, useReviews};
+const useOrderHistory = () => {
+	const getOrderHistory = async () => {
+		return await fetchData(
+			import.meta.env.VITE_API_URL + '/restaurant/order'
+		);
+	};
+
+	const addOrderHistory = async (inputs) => {
+		const fetchOptions = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: 'Bearer ' + token,
+			},
+			body: JSON.stringify(inputs),
+		};
+		return await fetchData(
+			import.meta.env.VITE_API_URL + '/restaurant/order',
+			fetchOptions
+		);
+	};
+	return {getOrderHistory, addOrderHistory};
+};
+
+export {useUser, useAuthentication, useMenu, useReviews, useOrderHistory};
