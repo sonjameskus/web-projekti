@@ -14,6 +14,7 @@ const findUserByUsername = async (username) => {
 		return null;
 	}
 
+	console.log(search[0]);
 	return search[0];
 };
 

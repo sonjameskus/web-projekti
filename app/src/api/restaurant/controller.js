@@ -1,5 +1,5 @@
 import promisePool from '../../utils/database.js';
-import getAddressById from './model.js';
+import {getAddressById, findUserById} from './model.js';
 
 const getList = async (req, res) => {
 	try {
@@ -13,8 +13,9 @@ const getList = async (req, res) => {
 
 const addFood = async (req, res) => {
 	try {
-		if (res.locals.user.user_id != 1) {
-			res.status(400).json('Not authorized');
+		const user = await findUserById(res.locals.user.user_id);
+		if (user.username != 'restaurant_manager') {
+			return res.status(400).json('Not authorized');
 		}
 
 		await promisePool.execute(
@@ -36,8 +37,9 @@ const addFood = async (req, res) => {
 
 const deleteFood = async (req, res) => {
 	try {
-		if (res.locals.user.user_id != 1) {
-			res.status(400).json('Not authorized');
+		const user = await findUserById(res.locals.user.user_id);
+		if (user.username != 'restaurant_manager') {
+			return res.status(400).json('Not authorized');
 		}
 
 		await promisePool.execute('DELETE FROM meals WHERE meal_id = ?', [
@@ -52,8 +54,9 @@ const deleteFood = async (req, res) => {
 
 const updateFood = async (req, res) => {
 	try {
-		if (res.locals.user.user_id != 1) {
-			res.status(400).json('Not authorized');
+		const user = await findUserById(res.locals.user.user_id);
+		if (user.username != 'restaurant_manager') {
+			return res.status(400).json('Not authorized');
 		}
 
 		const [meal] = await promisePool.execute(
