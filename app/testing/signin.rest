@@ -1,9 +1,0 @@
-### Post signin
-POST http://127.0.0.1:3000/api/user/signin
-content-type: application/json
-
-{
-  "username": "12345s",
-  "password": "bob12345",
-  "email": "email"
-}

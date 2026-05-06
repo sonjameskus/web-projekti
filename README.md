@@ -3,38 +3,37 @@
 npm install
 ```
 
-# 2. starttaa api
+# 2. lue .env_example ja editoi tiedosto
+
+# 3. starttaa api
 ```bash
 npm start
 ```
 
 # api doc
 
-# ✔ = valmis
-# X = ei valmis
-
 # api/user/
 
-    login ✔ - post kirjautuu käyttäjälle
+    login - post kirjautuu käyttäjälle
 
-    logout X - post kirjautuu ulos ja menee takaisin etusivulle
+    logout - post kirjautuu ulos ja menee takaisin etusivulle
 
-    signin ✔ - post tekee käyttäjän
+    signin - post tekee käyttäjän
 
-    delete X - delete poistaa käyttäjän (en tiiä tehäänkö tää) + (pitää olla kirjautunut)
+    delete - delete poistaa käyttäjän (en tiiä tehäänkö tää) + (pitää olla kirjautunut)
 
-    address X - get ottaa databasesta userin addressin - update lisää
+    address - get ottaa databasesta userin addressin - update lisää
 
-    getme ✔ - get returnaa userin jos on kirjautunut
+    getme - get returnaa userin jos on kirjautunut
 
 # api/restaurant/
 
-    list ✔ - get antaa ruokalistan
+    list - get antaa ruokalistan - post lisää ruoan - update updatee ruoan - delete poistaa ruoan (post, update, delete tarvii sisäänkirjautumisen adminilla)
 
-    review ✔ - get antaa listan - post laittaa arvostelun (pitää olla kirjautunut)
+    review - get antaa listan - post laittaa arvostelun (pitää olla kirjautunut)
 
-    order X - post tekee tilauksen (pitääkö olla kirjautunut?)
+    order - get ottaa databaset - post tekee tilauksen 
 
 
-# ex: http://127.0.0.1:3000/api/restaurant/list for localhost
+# esim: http://127.0.0.1:3000/api/restaurant/list localhostilla
 

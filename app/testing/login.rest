@@ -17,3 +17,8 @@ content-Type: application/json
   "user_id": "234",
   "review_content": "oli ihan hyvä ruoka kiitos palvelusta tai jottai"
 }
+
+###
+
+GET http://127.0.0.1:3000/api/restaurant/order
+Authorization: Bearer {{login.response.body.token}}

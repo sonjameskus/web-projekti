@@ -1,62 +1,132 @@
 import promisePool from '../../utils/database.js';
+import getAddressById from './model.js';
 
 const getList = async (req, res) => {
 	const [result] = await promisePool.execute('SELECT * FROM meals');
-	res.json(result);
+	res.status(200).json(result);
 };
 
 const addFood = async (req, res) => {
-	const [result] = await promisePool.execute('INSERT INTO  meals (?, ?, ?)');
-	res.json(result);
+	try {
+		await promisePool.execute(
+			'INSERT INTO  meals (meal_type, meal_name, meal_content, allergens, price) VALUES (?, ?, ?, ?, ?)',
+			[
+				req.body.meal_type,
+				req.body.meal_name,
+				req.body.meal_content,
+				req.body.allergens,
+				req.body.price,
+			]
+		);
+		res.status(200).json('Food added');
+	} catch (err) {
+		console.error(err);
+		res.status(500).json(err.message);
+	}
 };
 
 const deleteFood = async (req, res) => {
-	const [result] = await promisePool.execute('SELECT * FROM meals');
-	res.json(result);
+	try {
+		await promisePool.execute('DELETE FROM meals WHERE meal_id = ?', [
+			req.body.meal_id,
+		]);
+		res.status(200).json('Food deleted');
+	} catch (err) {
+		console.error(err);
+		res.status(500).json(err.message);
+	}
+};
+
+const updateFood = async (req, res) => {
+	try {
+		const [meal] = await promisePool.execute(
+			'SELECT * FROM meals WHERE meal_id = ?',
+			[req.body.meal_id]
+		);
+		if (meal.length == 0) {
+			return res.status(400).json('Meal not found');
+		}
+		await promisePool.execute(
+			'UPDATE meals SET meal_type = ?, meal_name = ?, meal_content = ?, allergens = ?, price = ? WHERE meal_id = ?',
+			[
+				req.body.meal_type || meal[0].meal_type,
+				req.body.meal_name || meal[0].meal_name,
+				req.body.meal_content || meal[0].meal_content,
+				req.body.allergens || meal[0].allergens,
+				req.body.price || meal[0].price,
+				req.body.meal_id,
+			]
+		);
+		res.status(200).json('Food updated');
+	} catch (err) {
+		console.error(err);
+		res.status(500).json(err.message);
+	}
 };
 
 const getReviews = async (req, res) => {
-	const [result] = await promisePool.execute('SELECT * FROM reviews');
-	res.json(result);
+	try {
+		const [result] = await promisePool.execute('SELECT * FROM reviews');
+		res.status(200).json(result);
+	} catch (err) {
+		console.error(err);
+		res.status(500).json(err.message);
+	}
 };
 
 const addReview = async (req, res) => {
-  try {
-
-    if (req.body.review_title == null || req.body.review_content == null) {
-      return res.status(400).json({ message: "Null content" });
-    }
-
-    await promisePool.execute(
-      `INSERT INTO reviews (user_id, review_title, review_content)
+	try {
+		await promisePool.execute(
+			`INSERT INTO reviews (user_id, review_title, review_content)
        VALUES (?, ?, ?)`,
-      [
-        res.locals.user.user_id,
-        req.body.review_title,
-        req.body.review_content,
-      ]
-    );
+			[
+				res.locals.user.user_id,
+				req.body.review_title,
+				req.body.review_content,
+			]
+		);
 
-    res.status(201).json({ message: "Review added" });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: err.message });
-  }
+		res.status(200).json('Review added');
+	} catch (err) {
+		console.error(err);
+		res.status(500).json(err.message);
+	}
 };
 
 const order = async (req, res) => {
-	const address = await promisePool.execute(
-		'INSERT INTO history (user_id, order, address_id) VALUES (?, ?, ?)',
-		[
-			escape.locals.user?.user_id,
-			req.body.order_content,
-			req.body.address_id,
-		]
-	);
-	res.sendStatus(201);
+	try {
+		const address = await getAddressById(res.locals.user?.user_id);
+		if (address == null) {
+			res.status(400).json('No address');
+		}
+		console.log(address);
+		await promisePool.execute(
+			'INSERT INTO history (user_id, order_content, address_id) VALUES (?, ?, ?)',
+			[
+				res.locals.user?.user_id,
+				req.body.order_content,
+				address.address_id,
+			]
+		);
+		res.status(200).json('Successfully ordered');
+	} catch (err) {
+		console.error(err);
+		res.status(500).json(err.message);
+	}
 };
 
-const getOrderHistory = async (req, res) => {};
+const getOrderHistory = async (req, res) => {
+	try {
+		const [orders] = await promisePool.execute(
+			'SELECT * FROM history WHERE (user_id) = ?',
+			[res.locals.user?.user_id]
+		);
+		res.status(200).json(orders);
+	} catch (err) {
+		console.error(err);
+		res.status(500).json(err.message);
+	}
+};
 
 export {
 	getList,
@@ -65,5 +135,6 @@ export {
 	order,
 	addFood,
 	deleteFood,
+	updateFood,
 	getOrderHistory,
 };
