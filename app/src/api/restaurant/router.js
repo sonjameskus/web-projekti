@@ -1,10 +1,33 @@
 import express from 'express';
-import {getList, getReviews, addReview, order} from './controller.js';
+import {
+	getList,
+	getReviews,
+	addReview,
+	order,
+	getOrderHistory,
+	addFood,
+	deleteFood,
+	updateFood,
+} from './controller.js';
 import {authenticateToken} from '../../middleware/auth.js';
+import {addAddress, getAddress, updateAddress} from '../user/controller.js';
 
 const router = express.Router();
-router.route('/list').get(getList);
+router
+	.route('/list')
+	.get(getList)
+	.post(authenticateToken, addFood)
+	.delete(authenticateToken, deleteFood)
+	.put(authenticateToken, updateFood);
 router.route('/review').get(getReviews).post(authenticateToken, addReview);
-router.route('/order').post(order);
+router
+	.route('/order')
+	.get(authenticateToken, getOrderHistory)
+	.post(authenticateToken, order);
+router
+	.route('/address')
+	.get(authenticateToken, getAddress)
+	.post(authenticateToken, addAddress)
+	.put(authenticateToken, updateAddress);
 
 export default router;
