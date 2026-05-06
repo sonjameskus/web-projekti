@@ -49,7 +49,6 @@ const signin = async (req, res) => {
 				);
 			});
 		});
-
 		res.status(200).json('Account created');
 	} catch (err) {
 		console.error(err);
