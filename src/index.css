@@ -115,12 +115,11 @@ input {
   color: #000000;
 }
 
-dialog {
+.inline-modal {
   font-family: 'Bookman Old Style';
   background-color: #ffe4c4;
   color: #000000;
   border: #edb572 dotted 2px;
-
 }
 
 [data-theme='dark'] .row {
@@ -270,8 +269,9 @@ dialog {
   color: #a38764;
 }
 
-[data-theme='dark'] .modal {
-  position: fixed;
+[data-theme='dark'] .inline-modal {
   background: #000000;
   color: #a38764;
+  font-family: 'Bookman Old Style';
+  position: inherit;
 }
