@@ -1,7 +1,6 @@
 import express from 'express';
 import {
 	login,
-	logout,
 	signin,
 	getme,
 	getAddress,
@@ -12,7 +11,6 @@ import {authenticateToken} from '../../middleware/auth.js';
 
 const router = express.Router();
 router.route('/login').post(login);
-router.route('/logout').post(authenticateToken, logout);
 router.route('/signin').post(signin);
 router.route('/me').get(authenticateToken, getme);
 router

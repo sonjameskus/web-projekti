@@ -34,11 +34,6 @@ const login = async (req, res) => {
 	}
 };
 
-const logout = (req, res) => {
-	res.json({message: 'logging out'});
-	// logouttaa
-};
-
 const signin = async (req, res) => {
 	try {
 		const username = req.body.username;
@@ -89,20 +84,24 @@ const getAddress = async (req, res) => {
 
 const addAddress = async (req, res) => {
 	try {
-		const [address] = await promisePool.execute(
-			'SELECT * FROM addresses WHERE user_id = ?',
-			[res.locals.user.user_id]
-		);
-
-		if (address.length != 0) {
-			return res.status(401).json('Address already added');
-		}
-
 		await promisePool.execute(
 			'INSERT INTO addresses (address, user_id) VALUES (?, ?)',
 			[req.body.address, res.locals.user.user_id]
 		);
 		res.status(200).json('Address added');
+	} catch (err) {
+		console.error(err);
+		res.status(500).json(err.message);
+	}
+};
+
+const deleteAddress = async (req, res) => {
+	try {
+		await promisePool.execute(
+			'DELETE FROM addresses WHERE address_id = ?',
+			[req.body.address_id]
+		);
+		res.status(200).json('Address updated');
 	} catch (err) {
 		console.error(err);
 		res.status(500).json(err.message);
@@ -122,4 +121,12 @@ const updateAddress = async (req, res) => {
 	}
 };
 
-export {login, logout, signin, getme, getAddress, addAddress, updateAddress};
+export {
+	login,
+	signin,
+	getme,
+	getAddress,
+	addAddress,
+	deleteAddress,
+	updateAddress,
+};
