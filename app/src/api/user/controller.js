@@ -26,7 +26,15 @@ const login = async (req, res) => {
 		};
 
 		const key = process.env.JWT_SECRET;
-		const token = jwt.sign({user_id: user.user_id}, key, {expiresIn: '1h'});
+		const token = jwt.sign(
+			{
+				user_id: user.user_id,
+				username: user.username,
+				email: user.email,
+			},
+			key,
+			{expiresIn: '1h'}
+		);
 		res.status(200).json({user: webUser, token});
 	} catch (err) {
 		console.error(err);
@@ -57,10 +65,32 @@ const signin = async (req, res) => {
 };
 
 const getme = async (req, res) => {
-	if (res.locals.user) {
-		res.status(200).json({user: res.locals.user});
-	} else {
-		res.status(400).json('Not logged in');
+	try {
+		const [addresses] = await promisePool.execute(
+			'SELECT * FROM addresses WHERE user_id = ?',
+			[res.locals.user.user_id]
+		);
+
+		const [reviews] = await promisePool.execute(
+			'SELECT * FROM reviews WHERE user_id = ?',
+			[res.locals.user.user_id]
+		);
+
+		const [history] = await promisePool.execute(
+			'SELECT * FROM history WHERE user_id = ?',
+			[res.locals.user.user_id]
+		);
+
+		res.status(200).json({
+			username: res.locals.user.username,
+			email: res.locals.user.email,
+			addresses: addresses,
+			reviews: reviews,
+			history: history,
+		});
+	} catch (err) {
+		console.error(err);
+		res.status(500).json(err.message);
 	}
 };
 
