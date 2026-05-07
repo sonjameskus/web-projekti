@@ -1,14 +1,11 @@
 import Navigation from '../components/Navigation';
 import {useEffect, useState} from 'react';
-import {Navigate} from 'react-router';
-import {useMenu, useUser} from '../hooks/apiHooks';
+import {useMenu} from '../hooks/apiHooks';
 
 const AdminPage = () => {
   const {getMenu, addMenuItem, deleteMenuItem, updateMenuItem} = useMenu();
-  const {getUserByToken} = useUser();
 
   const [data, setData] = useState([]);
-  const [user, setUser] = useState(null);
 
   const [updatingMealId, setUpdatingMealId] = useState(null);
 

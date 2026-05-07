@@ -20,24 +20,7 @@ const useUser = () => {
       import.meta.env.VITE_AUTH_API + '/users/username/' + username,
     );
   };*/
-	const modifyUser = async (token, username, email) => {
-		const options = {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${token}`,
-			},
-			body: JSON.stringify({
-				username,
-				email,
-			}),
-		};
-
-		return await fetchData(
-			import.meta.env.VITE_API_URL + '/user/me',
-			options
-		);
-	};
+	
 
 	const getUserByToken = useCallback(async (token) => {
 		const options = {
@@ -109,6 +92,7 @@ const useMenu = () => {
 		const fetchOptions = {
 			method: 'DELETE',
 			headers: {
+				'Content-Type': 'application/json',
 				Authorization: `Bearer ${token}`,
 			},
 			body: JSON.stringify({

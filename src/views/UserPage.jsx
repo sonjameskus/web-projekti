@@ -5,7 +5,7 @@ import {useUser} from '../hooks/apiHooks';
 
 const UserPage = () => {
   const [user, setUser] = useState(null);
-  const {getUserByToken, modifyUser} = useUser();
+  const {getUserByToken} = useUser();
 
   useEffect(() => {
     const getUser = async () => {
@@ -17,12 +17,7 @@ const UserPage = () => {
     getUser();
   }, []);
 
-  useEffect(() => {
-    const changeUser = async () => {
-     const token = localStorage.getItem('token');
-     
-    }
-  })
+
 
   return (
     <>
