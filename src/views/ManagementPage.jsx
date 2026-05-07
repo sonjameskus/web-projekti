@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import {useEffect, useState} from 'react';
 import {useUser} from '../hooks/apiHooks';
 
-const UserPage = () => {
+const ManagementPage = () => {
   const [user, setUser] = useState(null);
   const {getUserByToken} = useUser();
 
@@ -11,19 +11,13 @@ const UserPage = () => {
     const getUser = async () => {
       const token = localStorage.getItem('token');
       const userResponse = await getUserByToken(token);
-
-       console.log("USER RESPONSE:", userResponse);
-
-       
-      setUser(userResponse.user);
+      setUser(userResponse);
     };
 
     getUser();
   }, []);
 
   return (
-    <>
-      {user && (
         <>
           <div className="row">
             <div className="banner">
@@ -32,9 +26,9 @@ const UserPage = () => {
             </div>
             <Navigation />
             <div className="column">
-              <p>Käyttäjätunnus: {user.username}</p>
+              <p>Käyttäjätunnus: </p>
               <hr />
-              <p>Sähköpostiosoite: {user.email}</p>
+              <p>Sähköpostiosoite: </p>
               <hr />
               <p>Osoitteet: </p>
               <hr />
@@ -43,10 +37,8 @@ const UserPage = () => {
               <Link to="/history">Tilaushistoria</Link>
             </div>
           </div>
-        </>
-      )}
     </>
   );
 };
 
-export default UserPage;
+export default ManagementPage;

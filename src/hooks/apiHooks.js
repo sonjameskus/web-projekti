@@ -112,7 +112,7 @@ const useOrderHistory = () => {
 		);
 	};
 
-	const addOrderHistory = async (inputs) => {
+	const addOrderHistory = async (inputs, token) => {
 		const fetchOptions = {
 			method: 'POST',
 			headers: {
