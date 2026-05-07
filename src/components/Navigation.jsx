@@ -15,9 +15,7 @@ const Navigation = () => {
       <Link to="/userpage">Omat tiedot</Link>
       <Link to="/logout">Kirjaudu ulos</Link>
       </>}
-      <Link to="/managementpage">Hallintasivu</Link>
-      <Link to="/logout">Kirjaudu ulos</Link>
-  
+
       <ThemeToggle />
       {!user && <Link to="/login">Kirjaudu sisään</Link>}
     </nav>

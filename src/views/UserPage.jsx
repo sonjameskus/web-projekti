@@ -11,11 +11,7 @@ const UserPage = () => {
     const getUser = async () => {
       const token = localStorage.getItem('token');
       const userResponse = await getUserByToken(token);
-
-       console.log("USER RESPONSE:", userResponse);
-
-       
-      setUser(userResponse.user);
+      setUser(userResponse);
     };
 
     getUser();
