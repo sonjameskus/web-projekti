@@ -99,31 +99,32 @@ const Checkout = () => {
         <br />
 
         {addresses.length > 0 ? (
-  <>
-    <select className="dropdown"
-      value={address}
-      onChange={(e) => setAddress(e.target.value)}
-    >
-      <option value="">Valitse osoite</option>
+          <>
+            <select
+              className="dropdown"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            >
+              <option value="">Valitse osoite</option>
 
-      {addresses.map((item) => (
-        <option key={item.address_id} value={item.address}>
-          {item.address}
-        </option>
-      ))}
-    </select>
-  </>
-) : (
-  <>
-    <input
-      placeholder="Osoite"
-      value={address}
-      onChange={(e) => setAddress(e.target.value)}
-    />
-  </>
-)}
-<br />
-<br />
+              {addresses.map((item) => (
+                <option key={item.address_id} value={item.address}>
+                  {item.address}
+                </option>
+              ))}
+            </select>
+          </>
+        ) : (
+          <>
+            <input
+              placeholder="Osoite"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+          </>
+        )}
+        <br />
+        <br />
 
         <textarea
           className="description"
