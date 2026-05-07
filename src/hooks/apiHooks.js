@@ -20,7 +20,7 @@ const useUser = () => {
       import.meta.env.VITE_AUTH_API + '/users/username/' + username,
     );
   };*/
-	
+
 
 	const getUserByToken = useCallback(async (token) => {
 		const options = {
@@ -35,7 +35,7 @@ const useUser = () => {
 	}, []);
 
 	//return { postUser, checkUser, getUserByToken };
-	return {getUserByToken, modifyUser};
+	return {getUserByToken};
 };
 
 const useAuthentication = () => {
