@@ -20,7 +20,15 @@ const UserPage = () => {
     getUser();
   }, []);
 
+useEffect(() => {
+    const getUserAddress = async () => {
+      const token = localStorage.getItem('token');
+      const addressResponse = await getAddress(token);
+      setAddress(addressResponse);
+    };
 
+    getUserAddress();
+  }, []);
 
   return (
     <>
