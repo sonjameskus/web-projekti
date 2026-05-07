@@ -38,6 +38,7 @@ const useUser = () => {
 	return {getUserByToken};
 };
 
+
 const useAuthentication = () => {
 	const postLogin = async (inputs) => {
 		const fetchOptions = {
@@ -185,4 +186,66 @@ const useOrderHistory = () => {
 	return {getOrderHistory, addOrderHistory};
 };
 
-export {useUser, useAuthentication, useMenu, useReviews, useOrderHistory};
+
+const useAddresses = () => {
+	const getAddress = async () => {
+		return await fetchData(
+			import.meta.env.VITE_API_URL + '/user/address'
+		);
+	};
+
+	const addAddress = async (address, token) => {
+		const fetchOptions = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: 'Bearer ' + token,
+			},
+			body: JSON.stringify({
+				address,
+			}),
+		};
+		return await fetchData(
+			import.meta.env.VITE_API_URL + '/user/address',
+			fetchOptions
+		);
+	};
+
+		const deleteAddress = async (address, token) => {
+		const fetchOptions = {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify({
+				address,
+			}),
+		};
+		return await fetchData(
+			import.meta.env.VITE_API_URL + '/user/address',
+			fetchOptions
+		);
+	};
+	
+	const updateAddress = async (address, token) => {
+		const fetchOptions = {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify({
+				address,
+			}),
+		};
+		return await fetchData(
+			import.meta.env.VITE_API_URL + '/user/address',
+			fetchOptions
+		);
+	};
+
+	return {getAddress, addAddress, deleteAddress, updateAddress};
+};
+
+export {useUser, useAuthentication, useMenu, useReviews, useOrderHistory, useAddresses};

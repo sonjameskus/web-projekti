@@ -2,10 +2,13 @@ import Navigation from '../components/Navigation';
 import {Link} from 'react-router';
 import {useEffect, useState} from 'react';
 import {useUser} from '../hooks/apiHooks';
+import {useAddresses} from '../hooks/apiHooks';
 
 const UserPage = () => {
   const [user, setUser] = useState(null);
   const {getUserByToken} = useUser();
+  const [address, setAddress] = useState(null);
+  const {getAddress, addAddress, deleteAddress, updateAddress} = useAddresses();
 
   useEffect(() => {
     const getUser = async () => {

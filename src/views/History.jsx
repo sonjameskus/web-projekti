@@ -35,7 +35,7 @@ useEffect(() => {
         <p>
           Tilaushistoria: </p>
           <hr />
-          {data.map((order) => (
+          {data.reverse().map((order) => (
           <div key={order.history_id}>
             <h2>{new Date(order.created_at).toLocaleString('fi-FI')}</h2>
             <p>{order.order_content}</p>

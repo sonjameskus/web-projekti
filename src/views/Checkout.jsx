@@ -41,26 +41,25 @@ const Checkout = () => {
       .map((item) => `${item.meal_name} (${item.description || ''})`)
       .join(', ');
 
-    try {
-      await fetch(import.meta.env.VITE_API_URL + '/restaurant/order', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          order_content,
-          address,
-        }),
-      });
+    if (name.length > 5 && address.length > 5) {
+      try {
+        await fetch(import.meta.env.VITE_API_URL + '/restaurant/order', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            order_content,
+          }),
+        });
 
-      sessionStorage.removeItem('cart');
+        sessionStorage.removeItem('cart');
 
-      if (name.length > 0 && address.length > 0) {
         navigate('/thankyou');
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
     }
   };
 

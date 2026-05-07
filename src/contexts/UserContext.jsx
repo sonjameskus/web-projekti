@@ -37,7 +37,7 @@ const UserProvider = ({ children }) => {
 
       if (token) {
         const userResponse = await getUserByToken(token);
-        setUser(userResponse.user);
+        setUser(userResponse);
       }
     } catch (e) {
       console.log(e.message);
