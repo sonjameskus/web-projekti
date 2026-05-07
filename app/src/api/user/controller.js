@@ -15,7 +15,7 @@ const login = async (req, res) => {
 
 		const match = await bcrypt.compare(req.body.password, user.password);
 		if (!match) {
-			return res.status(400).json({message: 'Password incorrect'});
+			return res.json({message: 'Password incorrect'});
 		}
 
 		const webUser = {
