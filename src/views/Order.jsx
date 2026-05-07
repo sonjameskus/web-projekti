@@ -1,10 +1,18 @@
 import {useEffect, useState} from 'react';
 import Navigation from '../components/Navigation';
 import {useMenu} from '../hooks/apiHooks';
+import {useNavigate} from 'react-router';
 
 const Order = () => {
   const {getMenu} = useMenu();
+  const navigate = useNavigate();
+
   const [data, setData] = useState([]);
+  const [openId, setOpenId] = useState(null);
+
+  const [cart, setCart] = useState([]);
+  const [inputs, setInputs] = useState({});
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   useEffect(() => {
     const fetchMenu = async () => {
@@ -19,25 +27,29 @@ const Order = () => {
     fetchMenu();
   }, []);
 
-  const [openListId, setOpenListId] = useState(null);
-  const [inputs, setInputs] = useState({
-    description: '',
-  });
-
-  const handleInputChange = (evt) => {
-    setInputs({...inputs, [evt.target.name]: evt.target.value});
+  const handleInputChange = (mealId, value) => {
+    setInputs((prev) => ({
+      ...prev,
+      [mealId]: value,
+    }));
   };
 
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-    setOpenListId(false);
+  const addToCart = (item) => {
+    setCart((prev) => [
+      ...prev,
+      {
+        ...item,
+        description: inputs[item.meal_id] || '',
+      },
+    ]);
+
+    setOpenId(null);
+    setConfirmOpen(true);
   };
 
-  const handleOrderSubmit = (evt) => {
-    evt.preventDefault();
-    
-
-  }
+  useEffect(() => {
+  sessionStorage.setItem('cart', JSON.stringify(cart));
+}, [cart]);
 
   return (
     <div className="row">
@@ -52,41 +64,58 @@ const Order = () => {
       <div className="column">
         <h2>Menu</h2>
 
+        <button>🛒 ({cart.length})</button>
+
         {data.map((list) => (
           <div key={list.meal_id}>
             <h2>{list.meal_name}</h2>
             <p>{list.price} €</p>
-            <button
-              onClick={() =>
-                setOpenListId(openListId === list.meal_id ? null : list.meal_id)
-              }
-            >
-              Lisää koriin
-            </button>
-            {openListId === list.meal_id && (
+
+            <button onClick={() => setOpenId(list.meal_id)}>&#128722;</button>
+
+            {openId === list.meal_id && (
               <div className="inline-modal">
-                <h4>{list.meal_name} {list.price} €</h4>
+                <h4>
+                  {list.meal_name} {list.price} €
+                </h4>
                 <p>{list.meal_content}</p>
                 <p>{list.allergens}</p>
-                <form onSubmit={handleSubmit}>
-                  <label>Lisätiedot (esim. allergiat yms):</label>
-                  <br />
-                  <textarea
-                    className="description"
-                    rows={4}
-                    onChange={handleInputChange}
-                  />
-                  <br />
 
-                  <button type="submit" onClick={() => setOpenListId(false)}>
-                    Tilaa
-                  </button>
-                </form>
+                <textarea
+                  className="description"
+                  rows={4}
+                  placeholder="Lisätiedot (allergiat yms)"
+                  value={inputs[list.meal_id] || ''}
+                  onChange={(e) =>
+                    handleInputChange(list.meal_id, e.target.value)
+                  }
+                />
+                <br />
+                <button onClick={() => addToCart(list)}>Tilaa</button>
               </div>
             )}
             <hr />
           </div>
         ))}
+
+        {confirmOpen && (
+          <div className="modal">
+            <h3>Lisätty koriin</h3>
+            <p>Haluatko jatkaa ostoksia vai mennä ostoskoriin?</p>
+
+            <button onClick={() => setConfirmOpen(false)}>
+              Jatka ostoksia
+            </button>
+            <button
+              onClick={() => {
+                setConfirmOpen(false);
+                navigate('/checkout');
+              }}
+            >
+              Mene ostoskoriin
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

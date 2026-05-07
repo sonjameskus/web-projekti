@@ -1,6 +1,8 @@
 import './index.css';
 import Menu from './views/Menu';
 import Order from './views/Order';
+import Checkout from './views/Checkout.jsx';
+import ThankYou from './views/ThankYou.jsx';
 import Reviews from './views/Reviews';
 import UserPage from './views/UserPage';
 import History from './views/History';
@@ -21,6 +23,8 @@ const App = () => {
       <Route element={<Layout />}>
         <Route path="/" element={<Menu />} />
         <Route path="/order" element={<Order />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/thankyou" element={<ThankYou />} />
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/userpage" element={<ProtectedRoute><UserPage /></ProtectedRoute>} />
         <Route path="/adminpage" element={<ProtectedRoute><AdminPage /></ProtectedRoute>} />
