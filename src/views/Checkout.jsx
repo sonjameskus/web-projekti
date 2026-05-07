@@ -7,7 +7,7 @@ const Checkout = () => {
   const {getUserByToken} = useUser();
 
   const [cart, setCart] = useState([]);
-  const [user, setUser] = useState(null);
+  const [setUser] = useState(null);
   const [address, setAddress] = useState('');
   const [name, setName] = useState('');
   const [info, setInfo] = useState('');
@@ -56,7 +56,9 @@ const Checkout = () => {
 
       sessionStorage.removeItem('cart');
 
-      navigate('/thankyou');
+      if (name.length > 0 && address.length > 0) {
+        navigate('/thankyou');
+      }
     } catch (err) {
       console.log(err);
     }
@@ -84,8 +86,6 @@ const Checkout = () => {
 
         <h3>Toimitustiedot</h3>
 
-        {user && <p>Kirjautunut: {user.username}</p>}
-
         <input
           placeholder="Nimi"
           value={name}
@@ -107,9 +107,7 @@ const Checkout = () => {
           value={info}
           onChange={(e) => setInfo(e.target.value)}
         />
-
         <br />
-
         <button onClick={handleOrder}>Tilaa ({cart.length})</button>
       </div>
     </div>
