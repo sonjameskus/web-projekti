@@ -21,6 +21,7 @@ const useUser = () => {
     );
   };*/
 
+
 	const getUserByToken = useCallback(async (token) => {
 		const options = {
 			headers: {
@@ -73,8 +74,55 @@ const useMenu = () => {
 			import.meta.env.VITE_API_URL + '/restaurant/list'
 		);
 	};
+	const addMenuItem = async (inputs, token) => {
+		const fetchOptions = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: 'Bearer ' + token,
+			},
+			body: JSON.stringify(inputs),
+		};
+		return await fetchData(
+			import.meta.env.VITE_API_URL + '/restaurant/list',
+			fetchOptions
+		);
+	};
+	const deleteMenuItem = async (meal_id, token) => {
+		const fetchOptions = {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify({
+				meal_id,
+			}),
+		};
+		return await fetchData(
+			import.meta.env.VITE_API_URL + '/restaurant/list',
+			fetchOptions
+		);
+	};
+	const updateMenuItem = async (meal_id, inputs, token) => {
+		const fetchOptions = {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify({
+				meal_id,
+				...inputs,
+			}),
+		};
+		return await fetchData(
+			import.meta.env.VITE_API_URL + '/restaurant/list',
+			fetchOptions
+		);
+	};
 
-	return {getMenu};
+	return {getMenu, addMenuItem, deleteMenuItem, updateMenuItem};
 };
 
 const useReviews = () => {
@@ -106,13 +154,21 @@ const useReviews = () => {
 };
 
 const useOrderHistory = () => {
-	const getOrderHistory = async () => {
-		return await fetchData(
-			import.meta.env.VITE_API_URL + '/restaurant/order'
-		);
-	};
+  const getOrderHistory = async (token) => {
+    const fetchOptions = {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    };
 
-	const addOrderHistory = async (inputs) => {
+    return await fetchData(
+      import.meta.env.VITE_API_URL + '/restaurant/order',
+      fetchOptions
+    );
+  };
+
+	const addOrderHistory = async (inputs, token) => {
 		const fetchOptions = {
 			method: 'POST',
 			headers: {

@@ -122,6 +122,19 @@ input {
   border: #edb572 dotted 2px;
 }
 
+.modal {
+  background: #ffe4c4;
+  color: #000000;
+  font-family: 'Bookman Old Style';
+  position: fixed;
+  top: 37%;
+  left: 37%;
+  width: 25%;
+  height: 25%;
+  padding: 3%;
+  border: 2px, dotted, #edb572;
+}
+
 [data-theme='dark'] .row {
   display: grid;
   margin: 5%;
@@ -273,5 +286,17 @@ input {
   background: #000000;
   color: #a38764;
   font-family: 'Bookman Old Style';
-  position: inherit;
+}
+
+[data-theme='dark'] .modal {
+  background: #000000;
+  color: #a38764;
+  font-family: 'Bookman Old Style';
+  position: fixed;
+  top: 37%;
+  left: 37%;
+  width: 25%;
+  height: 25%;
+  padding: 3%;
+  border: 2px, dotted, #a38764;
 }

@@ -17,6 +17,8 @@ const UserPage = () => {
     getUser();
   }, []);
 
+
+
   return (
     <>
       {user && (
@@ -33,8 +35,6 @@ const UserPage = () => {
               <p>Sähköpostiosoite: {user.email}</p>
               <hr />
               <p>Osoitteet: </p>
-              <hr />
-              <p>Arvostelut: </p>
               <hr />
               <Link to="/history">Tilaushistoria</Link>
             </div>
