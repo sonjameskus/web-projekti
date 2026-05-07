@@ -20,6 +20,24 @@ const useUser = () => {
       import.meta.env.VITE_AUTH_API + '/users/username/' + username,
     );
   };*/
+	const modifyUser = async (token, username, email) => {
+		const options = {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify({
+				username,
+				email,
+			}),
+		};
+
+		return await fetchData(
+			import.meta.env.VITE_API_URL + '/user/me',
+			options
+		);
+	};
 
 	const getUserByToken = useCallback(async (token) => {
 		const options = {
@@ -34,7 +52,7 @@ const useUser = () => {
 	}, []);
 
 	//return { postUser, checkUser, getUserByToken };
-	return {getUserByToken};
+	return {getUserByToken, modifyUser};
 };
 
 const useAuthentication = () => {
@@ -73,8 +91,54 @@ const useMenu = () => {
 			import.meta.env.VITE_API_URL + '/restaurant/list'
 		);
 	};
+	const addMenuItem = async (inputs, token) => {
+		const fetchOptions = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: 'Bearer ' + token,
+			},
+			body: JSON.stringify(inputs),
+		};
+		return await fetchData(
+			import.meta.env.VITE_API_URL + '/restaurant/list',
+			fetchOptions
+		);
+	};
+	const deleteMenuItem = async (meal_id, token) => {
+		const fetchOptions = {
+			method: 'DELETE',
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify({
+				meal_id,
+			}),
+		};
+		return await fetchData(
+			import.meta.env.VITE_API_URL + '/restaurant/list',
+			fetchOptions
+		);
+	};
+	const updateMenuItem = async (meal_id, inputs, token) => {
+		const fetchOptions = {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify({
+				meal_id,
+				...inputs,
+			}),
+		};
+		return await fetchData(
+			import.meta.env.VITE_API_URL + '/restaurant/list',
+			fetchOptions
+		);
+	};
 
-	return {getMenu};
+	return {getMenu, addMenuItem, deleteMenuItem, updateMenuItem};
 };
 
 const useReviews = () => {

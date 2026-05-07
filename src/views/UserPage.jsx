@@ -5,7 +5,7 @@ import {useUser} from '../hooks/apiHooks';
 
 const UserPage = () => {
   const [user, setUser] = useState(null);
-  const {getUserByToken} = useUser();
+  const {getUserByToken, modifyUser} = useUser();
 
   useEffect(() => {
     const getUser = async () => {
@@ -16,6 +16,13 @@ const UserPage = () => {
 
     getUser();
   }, []);
+
+  useEffect(() => {
+    const changeUser = async () => {
+     const token = localStorage.getItem('token');
+     
+    }
+  })
 
   return (
     <>
@@ -33,8 +40,6 @@ const UserPage = () => {
               <p>Sähköpostiosoite: {user.email}</p>
               <hr />
               <p>Osoitteet: </p>
-              <hr />
-              <p>Arvostelut: </p>
               <hr />
               <Link to="/history">Tilaushistoria</Link>
             </div>
