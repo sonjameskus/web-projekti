@@ -136,8 +136,8 @@ const deleteAddress = async (req, res) => {
 const updateAddress = async (req, res) => {
 	try {
 		await promisePool.execute(
-			'UPDATE addresses SET address = ? WHERE user_id = ?',
-			[req.body.address, res.locals.user.user_id]
+			'UPDATE addresses SET address = ? WHERE address_id = ?',
+			[req.body.address, res.body.address_id]
 		);
 		res.status(200).json('Address updated');
 	} catch (err) {
