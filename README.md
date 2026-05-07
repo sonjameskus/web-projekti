@@ -20,7 +20,7 @@ Testaamiseen: Jest, Supertest
 
 VITE_API_URL=https://web-projekti-production.up.railway.app/api
 
-Linkki sovellukseen: web-projekti.vercel.app
+Linkki sovellukseen: https://web-projekti.vercel.app
 
 
 # 1. installaa dependencyt
