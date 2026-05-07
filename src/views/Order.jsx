@@ -64,7 +64,7 @@ const Order = () => {
       <div className="column">
         <h2>Menu</h2>
 
-        <button>🛒 ({cart.length})</button>
+        <button  onClick={() => navigate('/checkout')}>🛒 ({cart.length})</button>
 
         {data.map((list) => (
           <div key={list.meal_id}>
