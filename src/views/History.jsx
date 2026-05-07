@@ -6,11 +6,12 @@ import { useEffect, useState } from "react";
 const History = () => {
 const {getOrderHistory} = useOrderHistory();
 const [data, setData] = useState([]);
+const token = localStorage.getItem('token');
 
 useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const res = await getOrderHistory();
+        const res = await getOrderHistory(token);
         setData(res);
       } catch (err) {
         console.log(err);
@@ -35,7 +36,7 @@ useEffect(() => {
           Tilaushistoria: </p>
           <hr />
           {data.map((order) => (
-          <div key={order.order_id}>
+          <div key={order.history_id}>
             <h2>{new Date(order.created_at).toLocaleString('fi-FI')}</h2>
             <p>{order.order_content}</p>
             <hr />

@@ -154,11 +154,19 @@ const useReviews = () => {
 };
 
 const useOrderHistory = () => {
-	const getOrderHistory = async () => {
-		return await fetchData(
-			import.meta.env.VITE_API_URL + '/restaurant/order'
-		);
-	};
+  const getOrderHistory = async (token) => {
+    const fetchOptions = {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    };
+
+    return await fetchData(
+      import.meta.env.VITE_API_URL + '/restaurant/order',
+      fetchOptions
+    );
+  };
 
 	const addOrderHistory = async (inputs, token) => {
 		const fetchOptions = {
