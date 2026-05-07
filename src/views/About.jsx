@@ -39,8 +39,7 @@ const About = () => {
             zoom={13}
             style={{height: '300px', width: '100%'}}
           >
-            <TileLayer url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png" />
-
+            <TileLayer url="https://tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <Marker position={[60.2248, 25.0774]}>
               <Popup>
                 Tervetuloa syömään! Sijaitsemme osoitteessa Esimerkkitie 1 A
