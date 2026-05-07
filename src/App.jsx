@@ -4,6 +4,7 @@ import Order from './views/Order';
 import Checkout from './views/Checkout.jsx';
 import ThankYou from './views/ThankYou.jsx';
 import Reviews from './views/Reviews';
+import About from './views/About';
 import UserPage from './views/UserPage';
 import History from './views/History';
 import Login from './views/Login';
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/thankyou" element={<ThankYou />} />
         <Route path="/reviews" element={<Reviews />} />
+        <Route path="/about" element={<About />} />
         <Route path="/userpage" element={<ProtectedRoute><UserPage /></ProtectedRoute>} />
         <Route path="/adminpage" element={<ProtectedRoute><AdminPage /></ProtectedRoute>} />
         <Route path="/history" element={<ProtectedRoute><History /></ProtectedRoute>} />

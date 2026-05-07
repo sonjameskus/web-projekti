@@ -10,6 +10,7 @@ const Navigation = () => {
       <Link to="/">Menu</Link>
       <Link to="/order">Tilaa ruokaa kotiin</Link>
       <Link to="/reviews">Arvostelut</Link>
+      <Link to="/about">Tietoa meistä</Link>
       {user && user.username == "restaurant_manager" &&
       <>
       <Link to="/adminpage">Hallintasivu</Link>
@@ -19,7 +20,7 @@ const Navigation = () => {
       <Link to="/userpage">Omat tiedot</Link>
       <Link to="/logout">Kirjaudu ulos</Link>
       </>}
-     
+
       <ThemeToggle />
       {!user && <Link to="/login">Kirjaudu sisään</Link>}
     </nav>
