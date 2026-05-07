@@ -128,7 +128,7 @@ const order = async (req, res) => {
 		await promisePool.execute(
 			'INSERT INTO history (user_id, order_content, address_id) VALUES (?, ?, ?)',
 			[
-				res.locals.user?.user_id,
+				res.locals.user.user_id,
 				req.body.order_content,
 				newaddress.address_id,
 			]

@@ -4,7 +4,7 @@ POST http://127.0.0.1:3000/api/user/login
 content-type: application/json
 
 {
-  "username": "utta",
+  "username": "ut ta",
   "password": "bob12345"
 }
 
