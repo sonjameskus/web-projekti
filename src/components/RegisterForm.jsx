@@ -1,4 +1,4 @@
-import { useAuthentication } from "../hooks/apiHooks";
+import { useAuthentication, useUser } from "../hooks/apiHooks";
 import useForm from "../hooks/formHooks";
 
 const RegisterForm = () => {
@@ -8,16 +8,16 @@ const RegisterForm = () => {
     email: "",
   };
 
-  //const { postUser, checkUser, checkEmail } = useUser();
+  const { checkUser, checkEmail } = useUser();
   const { postRegister } = useAuthentication();
 
   const {
     inputs,
     handleInputChange,
     handleSubmit,
-    //handleError,
+    handleError,
     errors,
-    //clearErrors,
+    clearErrors,
   } = useForm(doRegister, initValues);
 
   async function doRegister() {
@@ -30,12 +30,12 @@ const RegisterForm = () => {
     }
   }
 
- /* const handleUserBlur = async () => {
+const handleUserBlur = async () => {
     clearErrors();
     try {
     const checkResult = await checkUser(inputs.username);
     if (!checkResult.available) {
-      handleError("username", "Username not available");
+      alert("username", "Username not available");
     }
   } catch {
     // tyhjä
@@ -48,12 +48,12 @@ const RegisterForm = () => {
     const checkResult = await checkEmail(inputs.email);
     console.log(checkResult);
     if (!checkResult.available) {
-      handleError("email", "Email not available");
+      alert("email", "Email not available");
     }
   } catch {
     // tyhjä
   };
-  };*/
+  };
 
   return (
     <>
@@ -67,7 +67,7 @@ const RegisterForm = () => {
             type="text"
             id="registeruser"
             onChange={handleInputChange}
-            //onBlur={handleUserBlur}
+            onBlur={handleUserBlur}
             autoComplete="username"
           />
         </div>
@@ -91,7 +91,7 @@ const RegisterForm = () => {
             type="email"
             id="registeremail"
             onChange={handleInputChange}
-            //onBlur={handleEmailBlur}
+            onBlur={handleEmailBlur}
             autoComplete="current-email"
           />
         </div>

@@ -13,13 +13,13 @@ const useUser = () => {
     };
 
     return await fetchData(import.meta.env.VITE_AUTH_API + '/users', options);
-  };
+  };*/
 
   const checkUser = async (username) => {
     return await fetchData(
-      import.meta.env.VITE_AUTH_API + '/users/username/' + username,
+      import.meta.env.VITE_API_URL + '/user/signin' + username,
     );
-  };*/
+  };
 
 
 	const getUserByToken = useCallback(async (token) => {
@@ -34,8 +34,7 @@ const useUser = () => {
 		);
 	}, []);
 
-	//return { postUser, checkUser, getUserByToken };
-	return {getUserByToken};
+	return {checkUser, getUserByToken};
 };
 
 
@@ -188,9 +187,15 @@ const useOrderHistory = () => {
 
 
 const useAddresses = () => {
-	const getAddress = async () => {
+	const getAddress = async (token) => {
+  const fetchOptions = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
 		return await fetchData(
-			import.meta.env.VITE_API_URL + '/user/address'
+			import.meta.env.VITE_API_URL + '/user/address',
+			fetchOptions
 		);
 	};
 
@@ -227,7 +232,7 @@ const useAddresses = () => {
 			fetchOptions
 		);
 	};
-	
+
 	const updateAddress = async (address, token) => {
 		const fetchOptions = {
 			method: 'PUT',

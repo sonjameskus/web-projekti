@@ -5,6 +5,7 @@ import RegisterForm from '../components/RegisterForm';
 
 const Login = () => {
   const [mode, setMode] = useState('login');
+  
   return (
      <div className="row">
       <div className="banner">

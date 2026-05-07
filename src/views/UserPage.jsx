@@ -7,8 +7,10 @@ import {useAddresses} from '../hooks/apiHooks';
 const UserPage = () => {
   const [user, setUser] = useState(null);
   const {getUserByToken} = useUser();
-  const [address, setAddress] = useState(null);
-  const {getAddress, addAddress, deleteAddress, updateAddress} = useAddresses();
+  const [address, setAddress] = useState([]);
+  const [addressInput, setAddressInput] = useState('');
+  const [showAddressForm, setShowAddressForm] = useState(false);
+  const {getAddress, addAddress} = useAddresses();
 
   useEffect(() => {
     const getUser = async () => {
@@ -20,7 +22,7 @@ const UserPage = () => {
     getUser();
   }, []);
 
-useEffect(() => {
+  useEffect(() => {
     const getUserAddress = async () => {
       const token = localStorage.getItem('token');
       const addressResponse = await getAddress(token);
@@ -29,6 +31,21 @@ useEffect(() => {
 
     getUserAddress();
   }, []);
+
+  const handleAddAddress = async (evt) => {
+    evt.preventDefault();
+    try {
+      const token = localStorage.getItem('token');
+      await addAddress(addressInput, token);
+
+      const updatedAddresses = await getAddress(token);
+      setAddress(updatedAddresses);
+      setAddressInput('');
+      setShowAddressForm(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -46,6 +63,31 @@ useEffect(() => {
               <p>Sähköpostiosoite: {user.email}</p>
               <hr />
               <p>Osoitteet: </p>
+              {address &&
+                address.map((item) => (
+                  <div key={item.address_id}>
+                    <p>{item.address}</p>
+                  </div>
+                ))}
+
+
+              <button onClick={() => setShowAddressForm(!showAddressForm)}>
+                Lisää osoite
+              </button>
+
+              {showAddressForm && (
+                <form onSubmit={handleAddAddress}>
+                  <input
+                    type="text"
+                    placeholder="Kirjoita osoite"
+                    value={addressInput}
+                    onChange={(e) => setAddressInput(e.target.value)}
+                  />
+                  <button type="submit">Tallenna</button>
+                </form>
+              )}
+
+
               <hr />
               <Link to="/history">Tilaushistoria</Link>
             </div>

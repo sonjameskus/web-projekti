@@ -7,10 +7,11 @@ const Checkout = () => {
   const {getUserByToken} = useUser();
 
   const [cart, setCart] = useState([]);
-  const [setUser] = useState(null);
+  const [user, setUser] = useState(null);
   const [address, setAddress] = useState('');
   const [name, setName] = useState('');
   const [info, setInfo] = useState('');
+  const [addresses, setAddresses] = useState([]);
 
   useEffect(() => {
     const storedCart = sessionStorage.getItem('cart');
@@ -25,7 +26,9 @@ const Checkout = () => {
       if (!token) return;
       try {
         const res = await getUserByToken(token);
+        console.log('ADDRESS RESPONSE:', res);
         setUser(res.user);
+        setAddresses(res.addresses);
       } catch (err) {
         console.log(err);
       }
@@ -41,7 +44,7 @@ const Checkout = () => {
       .map((item) => `${item.meal_name} (${item.description || ''})`)
       .join(', ');
 
-    if (name.length > 5 && address.length > 5) {
+    if (name.length > 3 && address.length > 5 && cart.length > 0) {
       try {
         await fetch(import.meta.env.VITE_API_URL + '/restaurant/order', {
           method: 'POST',
@@ -60,6 +63,8 @@ const Checkout = () => {
       } catch (err) {
         console.log(err);
       }
+    } else {
+      alert('Nimi/osoite puuttuu tai kori on tyhjä.');
     }
   };
 
@@ -91,13 +96,34 @@ const Checkout = () => {
           onChange={(e) => setName(e.target.value)}
         />
         <br />
-
-        <input
-          placeholder="Osoite"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-        />
         <br />
+
+        {addresses.length > 0 ? (
+  <>
+    <select className="dropdown"
+      value={address}
+      onChange={(e) => setAddress(e.target.value)}
+    >
+      <option value="">Valitse osoite</option>
+
+      {addresses.map((item) => (
+        <option key={item.address_id} value={item.address}>
+          {item.address}
+        </option>
+      ))}
+    </select>
+  </>
+) : (
+  <>
+    <input
+      placeholder="Osoite"
+      value={address}
+      onChange={(e) => setAddress(e.target.value)}
+    />
+  </>
+)}
+<br />
+<br />
 
         <textarea
           className="description"

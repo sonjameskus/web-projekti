@@ -135,6 +135,12 @@ input {
   border: 2px, dotted, #edb572;
 }
 
+.dropdown {
+  background: #ffe4c4;
+  color: #000000;
+  font-family: 'Bookman Old Style';
+}
+
 [data-theme='dark'] .row {
   display: grid;
   margin: 5%;
@@ -299,4 +305,10 @@ input {
   height: 25%;
   padding: 3%;
   border: 2px, dotted, #a38764;
+}
+
+[data-theme='dark'] .dropdown {
+  background: #000000;
+  color: #a38764;
+  font-family: 'Bookman Old Style';
 }
