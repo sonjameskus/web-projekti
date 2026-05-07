@@ -39,10 +39,12 @@ const About = () => {
             zoom={13}
             style={{height: '300px', width: '100%'}}
           >
-            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+            <TileLayer url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png" />
 
             <Marker position={[60.2248, 25.0774]}>
-              <Popup>Tervetuloa syömään! Sijaitsemme osoitteessa Esimerkkitie 1 A</Popup>
+              <Popup>
+                Tervetuloa syömään! Sijaitsemme osoitteessa Esimerkkitie 1 A
+              </Popup>
             </Marker>
           </MapContainer>
         </div>
