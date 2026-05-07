@@ -1,13 +1,23 @@
 import promisePool from '../../utils/database.js';
-import getAddressById from './model.js';
+import {getAddressById, findUserById} from './model.js';
 
 const getList = async (req, res) => {
-	const [result] = await promisePool.execute('SELECT * FROM meals');
-	res.status(200).json(result);
+	try {
+		const [result] = await promisePool.execute('SELECT * FROM meals');
+		res.status(200).json(result);
+	} catch (err) {
+		console.error(err);
+		res.status(500).json(err.message);
+	}
 };
 
 const addFood = async (req, res) => {
 	try {
+		const user = await findUserById(res.locals.user.user_id);
+		if (user.username != 'restaurant_manager') {
+			return res.status(400).json('Not authorized');
+		}
+
 		await promisePool.execute(
 			'INSERT INTO  meals (meal_type, meal_name, meal_content, allergens, price) VALUES (?, ?, ?, ?, ?)',
 			[
@@ -27,6 +37,11 @@ const addFood = async (req, res) => {
 
 const deleteFood = async (req, res) => {
 	try {
+		const user = await findUserById(res.locals.user.user_id);
+		if (user.username != 'restaurant_manager') {
+			return res.status(400).json('Not authorized');
+		}
+
 		await promisePool.execute('DELETE FROM meals WHERE meal_id = ?', [
 			req.body.meal_id,
 		]);
@@ -39,13 +54,20 @@ const deleteFood = async (req, res) => {
 
 const updateFood = async (req, res) => {
 	try {
+		const user = await findUserById(res.locals.user.user_id);
+		if (user.username != 'restaurant_manager') {
+			return res.status(400).json('Not authorized');
+		}
+
 		const [meal] = await promisePool.execute(
 			'SELECT * FROM meals WHERE meal_id = ?',
 			[req.body.meal_id]
 		);
+
 		if (meal.length == 0) {
 			return res.status(400).json('Meal not found');
 		}
+
 		await promisePool.execute(
 			'UPDATE meals SET meal_type = ?, meal_name = ?, meal_content = ?, allergens = ?, price = ? WHERE meal_id = ?',
 			[
@@ -85,7 +107,6 @@ const addReview = async (req, res) => {
 				req.body.review_content,
 			]
 		);
-
 		res.status(200).json('Review added');
 	} catch (err) {
 		console.error(err);
@@ -99,7 +120,7 @@ const order = async (req, res) => {
 		if (address == null) {
 			res.status(400).json('No address');
 		}
-		console.log(address);
+
 		await promisePool.execute(
 			'INSERT INTO history (user_id, order_content, address_id) VALUES (?, ?, ?)',
 			[
