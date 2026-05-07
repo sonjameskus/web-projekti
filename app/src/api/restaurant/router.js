@@ -10,7 +10,6 @@ import {
 	updateFood,
 } from './controller.js';
 import {authenticateToken} from '../../middleware/auth.js';
-import {addAddress, getAddress, updateAddress} from '../user/controller.js';
 
 const router = express.Router();
 router
@@ -24,10 +23,5 @@ router
 	.route('/order')
 	.get(authenticateToken, getOrderHistory)
 	.post(authenticateToken, order);
-router
-	.route('/address')
-	.get(authenticateToken, getAddress)
-	.post(authenticateToken, addAddress)
-	.put(authenticateToken, updateAddress);
 
 export default router;

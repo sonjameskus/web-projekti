@@ -97,7 +97,7 @@ const Reviews = () => {
             </>
           )}
         </>
-        {data.map((review) => (
+        {data.reverse().map((review) => (
           <div key={review.review_id}>
             <h2>{review.review_title}</h2>
             <p>Arvostelu kirjoitettu {new Date(review.created_at).toLocaleString('fi-FI')}</p>

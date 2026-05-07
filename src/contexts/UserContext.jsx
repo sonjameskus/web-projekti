@@ -1,21 +1,21 @@
-import { createContext, useState } from "react";
-import { useAuthentication, useUser } from "../hooks/apiHooks";
-import { useNavigate } from "react-router";
+import {createContext, useState} from 'react';
+import {useAuthentication, useUser} from '../hooks/apiHooks';
+import {useNavigate} from 'react-router';
 
 const UserContext = createContext(null);
 
-const UserProvider = ({ children }) => {
+const UserProvider = ({children}) => {
   const [user, setUser] = useState(null);
-  const { postLogin } = useAuthentication();
-  const { getUserByToken } = useUser();
+  const {postLogin} = useAuthentication();
+  const {getUserByToken} = useUser();
   const navigate = useNavigate();
 
   const handleLogin = async (credentials) => {
     try {
       const loginResult = await postLogin(credentials);
-      localStorage.setItem("token", loginResult.token);
+      localStorage.setItem('token', loginResult.token);
       setUser(loginResult.user);
-      navigate("/UserPage");
+      navigate('/UserPage');
     } catch (e) {
       console.log(e.message);
     }
@@ -23,21 +23,21 @@ const UserProvider = ({ children }) => {
 
   const handleLogout = () => {
     try {
-      localStorage.removeItem("token");
+      localStorage.removeItem('token');
       setUser(null);
-      navigate("/login");
+      navigate('/login');
     } catch (e) {
       console.log(e.message);
     }
   };
 
-   const handleAutoLogin = async () => {
+  const handleAutoLogin = async () => {
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem('token');
 
       if (token) {
         const userResponse = await getUserByToken(token);
-        setUser(userResponse.user);
+        setUser(userResponse);
       }
     } catch (e) {
       console.log(e.message);
@@ -46,11 +46,10 @@ const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ user, handleLogin, handleLogout, handleAutoLogin }}
+      value={{user, handleLogin, handleLogout, handleAutoLogin}}
     >
       {children}
     </UserContext.Provider>
-
   );
 };
-export { UserProvider, UserContext };
+export {UserProvider, UserContext};

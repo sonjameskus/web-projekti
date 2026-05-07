@@ -116,17 +116,21 @@ const addReview = async (req, res) => {
 
 const order = async (req, res) => {
 	try {
-		const address = await getAddressById(res.locals.user?.user_id);
+		const address = await getAddressById(res.locals.user.user_id);
 		if (address == null) {
-			res.status(400).json('No address');
+			await promisePool.execute(
+				'INSERT INTO addresses (address, user_id) VALUES (?, ?)',
+				[req.body.address, res.locals.user.user_id]
+			);
 		}
 
+		const newaddress = await getAddressById(res.locals.user.user_id);
 		await promisePool.execute(
 			'INSERT INTO history (user_id, order_content, address_id) VALUES (?, ?, ?)',
 			[
-				res.locals.user?.user_id,
+				res.locals.user.user_id,
 				req.body.order_content,
-				address.address_id,
+				newaddress.address_id,
 			]
 		);
 		res.status(200).json('Successfully ordered');

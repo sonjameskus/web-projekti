@@ -7,7 +7,7 @@ const Checkout = () => {
   const {getUserByToken} = useUser();
 
   const [cart, setCart] = useState([]);
-  const [user, setUser] = useState(null);
+  const [setUser] = useState(null);
   const [address, setAddress] = useState('');
   const [name, setName] = useState('');
   const [info, setInfo] = useState('');
@@ -41,24 +41,25 @@ const Checkout = () => {
       .map((item) => `${item.meal_name} (${item.description || ''})`)
       .join(', ');
 
-    try {
-      await fetch(import.meta.env.VITE_API_URL + '/restaurant/order', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          order_content,
-          address,
-        }),
-      });
+    if (name.length > 5 && address.length > 5) {
+      try {
+        await fetch(import.meta.env.VITE_API_URL + '/restaurant/order', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            order_content,
+          }),
+        });
 
-      sessionStorage.removeItem('cart');
+        sessionStorage.removeItem('cart');
 
-      navigate('/thankyou');
-    } catch (err) {
-      console.log(err);
+        navigate('/thankyou');
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
@@ -84,8 +85,6 @@ const Checkout = () => {
 
         <h3>Toimitustiedot</h3>
 
-        {user && <p>Kirjautunut: {user.username}</p>}
-
         <input
           placeholder="Nimi"
           value={name}
@@ -107,9 +106,7 @@ const Checkout = () => {
           value={info}
           onChange={(e) => setInfo(e.target.value)}
         />
-
         <br />
-
         <button onClick={handleOrder}>Tilaa ({cart.length})</button>
       </div>
     </div>
