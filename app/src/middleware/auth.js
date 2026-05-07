@@ -13,7 +13,7 @@ const authenticateToken = (req, res, next) => {
 		res.locals.user = jwt.verify(token, process.env.JWT_SECRET);
 		next();
 	} catch (err) {
-		res.status(403).send({message: 'invalid token'});
+		res.status(403).json({message: 'invalid token', error: err});
 	}
 };
 
