@@ -12,7 +12,16 @@ const About = () => {
       <Navigation />
 
       <div className="column">
-        <p>Teksti tänne:DDD</p>
+        <p>Teksti tänne:DDD 
+        <br />
+        <br /> Pistetään pöytä Koreaksi :D
+        <br /> 
+        <br />Teksti öööööööööööööööööööööööööööööööööööööööööööööööööööööööööööööööööö
+        <br /> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+        <br />
+        <br />
+        <br /> Puh.: 020202
+        <br /> Osoite: Esimerkkitie 1 A, Tuolnoinjoki</p>
       </div>
     </div>
   );
