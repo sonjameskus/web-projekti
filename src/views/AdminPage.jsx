@@ -5,7 +5,6 @@ import {useMenu} from '../hooks/apiHooks';
 const AdminPage = () => {
   const {getMenu, addMenuItem, deleteMenuItem, updateMenuItem} = useMenu();
   const [data, setData] = useState([]);
-  const [orders, setOrders] = useState([]);
   const [updatingMealId, setUpdatingMealId] = useState(null);
 
   const [inputs, setInputs] = useState({
@@ -28,28 +27,6 @@ const AdminPage = () => {
 
     fetchMenu();
   }, []);
-
-  useEffect(() => {
-    const fetchOrders = async () => {
-      const token = localStorage.getItem('token');
-
-      const res = await fetch(
-        import.meta.env.VITE_API_URL + '/restaurant/allorders',
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      const data = await res.json();
-
-      setOrders(data);
-    };
-
-    fetchOrders();
-  }, []);
-
 
   const handleInputChange = (evt) => {
     setInputs({
@@ -120,16 +97,6 @@ const AdminPage = () => {
 
       <div className="column">
         <h1>Menun hallintasivu</h1>
-
-        <h2>Tilaukset:</h2>
-        {orders.map((order) => (
-  <div key={order.history_id}>
-    <p>{order.order_content}</p>
-    <button>Valmis</button>
-    <hr />
-  </div>
-))}
-<br />
 
         <h2>Lisää Menuun uusi ruoka</h2>
 
