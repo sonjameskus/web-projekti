@@ -153,6 +153,26 @@ const getOrderHistory = async (req, res) => {
 	}
 };
 
+const getAllOrders = async (req, res) => {
+  try {
+    const user = await findUserById(res.locals.user.user_id);
+
+    if (user.username !== 'restaurant_manager') {
+      return res.status(403).json('Not authorized');
+    }
+
+    const [orders] = await promisePool.execute(`
+      SELECT * FROM history
+      ORDER BY history_id DESC
+    `);
+
+    res.status(200).json(orders);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err.message);
+  }
+};
+
 export {
 	getList,
 	getReviews,
@@ -162,4 +182,5 @@ export {
 	deleteFood,
 	updateFood,
 	getOrderHistory,
+	getAllOrders,
 };
