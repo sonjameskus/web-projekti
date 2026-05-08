@@ -116,6 +116,7 @@ const addReview = async (req, res) => {
 
 const order = async (req, res) => {
 	try {
+		console.log(req.body.address);
 		const address = await getAddressById(res.locals.user.user_id);
 		if (address == null) {
 			await promisePool.execute(
