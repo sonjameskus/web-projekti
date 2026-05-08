@@ -26,7 +26,6 @@ const Checkout = () => {
       if (!token) return;
       try {
         const res = await getUserByToken(token);
-        console.log('ADDRESS RESPONSE:', res);
         setUser(res.user);
         setAddresses(res.addresses);
       } catch (err) {
